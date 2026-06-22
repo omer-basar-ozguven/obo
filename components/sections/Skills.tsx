@@ -5,7 +5,7 @@ import { RevealGroup, RevealItem } from "@/components/Reveal";
 export function Skills() {
   return (
     <Section id="skills" eyebrow="Toolkit" title="Skills & technologies">
-      <RevealGroup className="grid gap-6 sm:grid-cols-2" stagger={0.12}>
+      <RevealGroup className="grid gap-6 sm:grid-cols-2 items-start" stagger={0.12}>
         {portfolio.skills.map((group) => (
           <RevealItem
             key={group.category}

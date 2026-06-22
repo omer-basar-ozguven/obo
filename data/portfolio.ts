@@ -12,21 +12,50 @@ export type SocialLink = {
   icon: "github" | "linkedin" | "twitter" | "mail" | "globe";
 };
 
+export type ProjectStatus = "live" | "finished" | "in-progress";
+
+export type ProjectType = "product" | "consulting";
+
 export type Project = {
   title: string;
   description: string;
-  /** e.g. "2024", "Open source", "Side project" */
+  /** Defaults to "product" when omitted */
+  type?: ProjectType;
+  /** e.g. "iOS & Android", "B2B", "Open Source", "Side project" */
   tag?: string;
-  tech: string[];
+  status?: ProjectStatus;
+  tech?: string[];
+  /** Landing page or web app URL */
   liveUrl?: string;
+  /** iOS App Store URL */
+  appStoreUrl?: string;
+  /** Google Play Store URL */
+  playStoreUrl?: string;
+  /** Public GitHub repo URL */
   repoUrl?: string;
-  /** Emoji or short label shown in the card header if no image */
+  /** App icon image URL — used instead of accent emoji when provided */
+  iconUrl?: string;
+  /** Emoji shown in the card header when no iconUrl */
   accent?: string;
 };
 
 export type SkillGroup = {
   category: string;
   items: string[];
+};
+
+export type Education = {
+  degree: string;
+  institution: string;
+  period: string;
+  url?: string;
+};
+
+export type Certification = {
+  name: string;
+  issuer: string;
+  year: string;
+  certificateUrl?: string;
 };
 
 export type Portfolio = {
@@ -41,6 +70,8 @@ export type Portfolio = {
   /** Used for the mailto contact button */
   email: string;
   resumeUrl?: string;
+  /** Profile photo shown in the hero */
+  avatarUrl?: string;
   socials: SocialLink[];
   about: {
     paragraphs: string[];
@@ -55,91 +86,144 @@ export type Portfolio = {
   };
   projects: Project[];
   skills: SkillGroup[];
+  education: Education[];
+  certifications: Certification[];
 };
 
 export const portfolio: Portfolio = {
-  name: "Omer Bayram",
-  role: "Software Engineer & Co-Founder",
-  tagline: "I build products people love to use.",
+  name: "Ömer Başar Özgüven",
+  role: "Software Engineer",
+  tagline: "I build things that ship.",
   summary:
-    "Software engineer and co-founder focused on shipping fast, reliable, and delightful web applications from idea to scale.",
-  location: "Remote",
-  email: "you@example.com",
+    "Co-founder of Bronix and full-stack engineer who turns ideas into real products — mobile apps, AI tools, and web platforms from zero to launch.",
+  location: "Turkey",
+  email: "omerbasarozguven@gmail.com",
   resumeUrl: undefined,
+  avatarUrl: "/icons/obo.jpeg",
   socials: [
     { label: "GitHub", href: "https://github.com/yourhandle", icon: "github" },
     {
       label: "LinkedIn",
-      href: "https://linkedin.com/in/yourhandle",
+      href: "https://www.linkedin.com/in/omerbasarozguven/",
       icon: "linkedin",
     },
-    { label: "X", href: "https://x.com/yourhandle", icon: "twitter" },
-    { label: "Email", href: "mailto:you@example.com", icon: "mail" },
+    { label: "Email", href: "mailto:omerbasarozguven@gmail.com", icon: "mail" },
   ],
   about: {
     paragraphs: [
-      "I'm a software engineer who loves turning ambiguous problems into clean, well-crafted products. Over the years I've worked across the stack, from pixel-perfect interfaces to the systems that power them.",
-      "As a co-founder, I wear a lot of hats, balancing engineering with product strategy, and shipping decisions. I care deeply about user experience, performance, and writing code that the team can build on for years.",
+      "I'm a software engineer who co-founded Bronix, a product studio where I led engineering across more than a dozen consumer apps from zero to launch — couples tools, AI interior design, safe-walking navigation, a doctor-facing EMR, a freight marketplace and so on. Each product taught me something the next one benefited from.",
+      "My stack is deliberately broad: Flutter and Expo for mobile, Next.js for web and admin dashboards, Golang and Python for REST APIs and data pipelines, Firebase and Supabase on the backend, and increasingly AI-native tooling with VoltAgent, OpenRouter, and Fal.ai. I've also worked with big data systems and care as much about shipping something people actually pay for as I do about clean architecture.",
     ],
     highlights: [
-      { label: "Years building", value: "5+" },
-      { label: "Products shipped", value: "12+" },
-      { label: "Company", value: "Co-Founder" },
+      { label: "Products shipped", value: "10+" },
+      { label: "Platforms", value: "Mobile & Web" },
+      { label: "Available", value: "Now" },
     ],
     company: {
-      name: "Your Company",
-      role: "Co-Founder & Engineer",
+      name: "Bronix",
+      role: "Previously · Co-Founder",
       blurb:
-        "We're building tools that help teams move faster without sacrificing quality. I lead engineering and shape the product from the ground up.",
-      url: "https://yourcompany.com",
+        "A product studio I co-founded and led engineering at — shipping subscription mobile apps and AI-powered tools across Flutter, Expo, and Next.js, from architecture decisions to App Store release.",
+      url: "https://bronixengineering.com",
     },
   },
   projects: [
     {
-      title: "Flagship Product",
+      title: "Walkable",
       description:
-        "The core platform behind my company, built for speed and scale. Real-time collaboration, a polished UI, and an architecture designed to grow.",
-      tag: "Co-Founder",
-      tech: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind"],
-      liveUrl: "https://yourcompany.com",
-      accent: "🚀",
+        "AI-powered walking navigation that color-codes streets by walkability so you always take the safest route through any city. Privacy-first — no account required, location stays on your device.",
+      tag: "iOS",
+      status: "live",
+      tech: ["Flutter", "VoltAgent"],
+      liveUrl: "https://walkable.bronixlabs.com/",
+      appStoreUrl: "https://apps.apple.com/app/id6762026493",
+      iconUrl: "https://www.bronixengineering.com/images/walkable-app-icon.png",
     },
     {
-      title: "Open Source Library",
+      title: "Toxic Flamingo",
       description:
-        "A developer tool that takes the pain out of a common workflow. Well-documented, thoroughly tested, and used by developers worldwide.",
-      tag: "Open source",
-      tech: ["TypeScript", "Node.js", "Vitest"],
-      repoUrl: "https://github.com/yourhandle/project",
-      accent: "📦",
+        "A to-do app with attitude — it nags, roasts, and guilt-trips you until tasks are actually done. Rage Mode, app blocking, and a Pomodoro timer for people who need accountability with a personality.",
+      tag: "iOS",
+      status: "live",
+      appStoreUrl: "https://apps.apple.com/app/id6759795623",
+      iconUrl: "https://www.bronixengineering.com/images/toxic-flamingo-app-icon.png",
     },
     {
-      title: "Side Project",
+      title: "NextRoom",
       description:
-        "A weekend experiment that turned into something people actually use. A great playground for trying out new ideas and technologies.",
-      tag: "2025",
-      tech: ["React", "Framer Motion", "Supabase"],
-      liveUrl: "https://example.com",
-      repoUrl: "https://github.com/yourhandle/side-project",
-      accent: "✨",
+        "AI interior design app that transforms any space — indoors, outdoors, or landscape — with a single photo and a style choice. Pick from 12+ curated styles or write your own prompt and get a stunning redesign in seconds.",
+      tag: "iOS",
+      status: "live",
+      appStoreUrl: "https://apps.apple.com/app/id6761188961",
+      iconUrl: "https://www.bronixengineering.com/images/nextroom-app-icon.png",
+    },
+    {
+      title: "yükAl",
+      description:
+        "Turkish freight marketplace connecting cargo owners with truck drivers — post a shipment, get matched instantly, and reach thousands of vehicles across all 81 provinces. Free to list, subscription-based for carriers.",
+      tag: "iOS & Android · Web",
+      status: "live",
+      liveUrl: "https://www.yukal.net/",
+      appStoreUrl: "https://apps.apple.com/app/id1663676145",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.application.yukal",
+      iconUrl: "/icons/yukal_icon.png",
+    },
+    {
+      title: "Banana Labs",
+      description:
+        "AI creative studio for generating UGC videos, product shoots, and images — powered by a multi-model architecture that runs several AI models in parallel so you can compare outputs instantly.",
+      tag: "Web App",
+      status: "live",
+      liveUrl: "https://bananalabs.co",
+      iconUrl: "/icons/banana-labs-icon.png",
     },
   ],
   skills: [
     {
+      category: "AI & Agents",
+      items: ["VoltAgent", "LangChain", "OpenRouter", "Fal.ai", "Apify", "Claude API", "OpenAI API", "Cursor", "Claude Code"],
+    },
+    {
+      category: "Data & Infrastructure",
+      items: ["Firebase", "Supabase", "PostgreSQL", "MongoDB", "Redis", "PostGIS", "Docker", "Google Cloud", "AWS", "Vercel", "Railway"],
+    },
+    {
+      category: "Mobile",
+      items: ["Flutter", "Expo", "React Native", "Firebase SDK", "RevenueCat", "Google Play Console", "App Store Connect"],
+    },
+    {
+      category: "Backend & APIs",
+      items: ["Node.js", "Hono", "Express", "Fiber", "Django", "Firebase Functions"],
+    },
+    {
       category: "Languages",
-      items: ["TypeScript", "JavaScript", "Python", "SQL", "Go"],
+      items: ["TypeScript", "JavaScript", "Dart", "Python", "Go", "SQL"],
     },
     {
-      category: "Frontend",
-      items: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+      category: "Web & Frontend",
+      items: ["React", "Next.js", "Tailwind CSS", "shadcn/ui"],
+    },
+  ],
+  education: [
+    {
+      degree: "B.Sc. Mechanical Engineering",
+      institution: "Bilkent University",
+      period: "2016 – 2021",
+      url: "https://www.bilkent.edu.tr/",
+    },
+  ],
+  certifications: [
+    {
+      name: "Claude Code 101",
+      issuer: "Anthropic",
+      year: "2026",
+      certificateUrl: "https://verify.skilljar.com/c/q7s5bqdyhtj7",
     },
     {
-      category: "Backend",
-      items: ["Node.js", "PostgreSQL", "REST", "GraphQL", "Redis"],
-    },
-    {
-      category: "Tooling & Cloud",
-      items: ["Docker", "AWS", "Vercel", "Git", "CI/CD"],
+      name: "Claude Platform 101",
+      issuer: "Anthropic",
+      year: "2026",
+      certificateUrl: "https://verify.skilljar.com/c/zzocwpy8rytv",
     },
   ],
 };

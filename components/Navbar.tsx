@@ -9,6 +9,7 @@ const LINKS = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -27,7 +28,7 @@ export function Navbar() {
     .split(" ")
     .map((w) => w[0])
     .join("")
-    .slice(0, 2)
+    .slice(0, 3)
     .toUpperCase();
 
   return (

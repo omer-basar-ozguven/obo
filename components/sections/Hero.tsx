@@ -29,13 +29,13 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         <motion.div
           aria-hidden
-          className="absolute -left-32 top-10 h-[28rem] w-[28rem] rounded-full bg-accent/25 blur-[120px]"
+          className="absolute -left-32 top-10 h-112 w-md rounded-full bg-accent/25 blur-[120px]"
           animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           aria-hidden
-          className="absolute -right-24 bottom-0 h-[26rem] w-[26rem] rounded-full bg-accent-2/20 blur-[120px]"
+          className="absolute -right-24 bottom-0 h-104 w-104 rounded-full bg-accent-2/20 blur-[120px]"
           animate={{ x: [0, -30, 0], y: [0, -40, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -43,85 +43,113 @@ export function Hero() {
       </div>
 
       <motion.div
-        className="mx-auto w-full max-w-5xl"
+        className="mx-auto w-full max-w-5xl lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16"
         variants={container}
         initial="hidden"
         animate="visible"
       >
-        <motion.span
-          variants={item}
-          className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm text-muted backdrop-blur"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-2 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-2" />
-          </span>
-          Available for new opportunities
-        </motion.span>
+        {/* Text column */}
+        <div>
+          {/* Mobile avatar */}
+          {portfolio.avatarUrl && (
+            <motion.div variants={item} className="mb-8 lg:hidden">
+              <img
+                src={portfolio.avatarUrl}
+                alt={portfolio.name}
+                className="h-20 w-20 rounded-full border border-border object-cover"
+              />
+            </motion.div>
+          )}
 
-        <motion.h1
-          variants={item}
-          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl"
-        >
-          {portfolio.name}
-        </motion.h1>
-
-        <motion.p
-          variants={item}
-          className="mt-5 max-w-2xl font-display text-2xl font-medium tracking-tight sm:text-4xl"
-        >
-          <span className="text-gradient">{portfolio.tagline}</span>
-        </motion.p>
-
-        <motion.p
-          variants={item}
-          className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
-        >
-          {portfolio.summary}
-        </motion.p>
-
-        <motion.div
-          variants={item}
-          className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted"
-        >
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-4 w-4 text-accent-soft" />
-            {portfolio.location}
-          </span>
-          <span className="font-mono">{portfolio.role}</span>
-        </motion.div>
-
-        <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
-          <a
-            href="#projects"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-white transition-transform hover:scale-105"
+          <motion.span
+            variants={item}
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm text-muted backdrop-blur"
           >
-            View my work
-            <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-6 py-3 font-medium text-foreground backdrop-blur transition-colors hover:border-accent-soft hover:text-accent-soft"
-          >
-            Get in touch
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-        </motion.div>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-2 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-2" />
+            </span>
+            Available for new opportunities
+          </motion.span>
 
-        <motion.div variants={item} className="mt-10 flex items-center gap-3">
-          {portfolio.socials.map((social) => (
+          <motion.h1
+            variants={item}
+            className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl"
+          >
+            {portfolio.name}
+          </motion.h1>
+
+          <motion.p
+            variants={item}
+            className="mt-5 max-w-2xl font-display text-2xl font-medium tracking-tight sm:text-4xl"
+          >
+            <span className="text-gradient">{portfolio.tagline}</span>
+          </motion.p>
+
+          <motion.p
+            variants={item}
+            className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+          >
+            {portfolio.summary}
+          </motion.p>
+
+          <motion.div
+            variants={item}
+            className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted"
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin className="h-4 w-4 text-accent-soft" />
+              {portfolio.location}
+            </span>
+            <span className="font-mono">{portfolio.role}</span>
+          </motion.div>
+
+          <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
             <a
-              key={social.label}
-              href={social.href}
-              target={social.href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface/50 text-muted transition-all hover:-translate-y-0.5 hover:border-accent-soft hover:text-foreground"
+              href="#projects"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-white transition-transform hover:scale-105"
             >
-              <SocialIcon name={social.icon} className="h-5 w-5" />
+              View my work
+              <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
             </a>
-          ))}
-        </motion.div>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-6 py-3 font-medium text-foreground backdrop-blur transition-colors hover:border-accent-soft hover:text-accent-soft"
+            >
+              Get in touch
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </motion.div>
+
+          <motion.div variants={item} className="mt-10 flex items-center gap-3">
+            {portfolio.socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface/50 text-muted transition-all hover:-translate-y-0.5 hover:border-accent-soft hover:text-foreground"
+              >
+                <SocialIcon name={social.icon} className="h-5 w-5" />
+              </a>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Desktop photo */}
+        {portfolio.avatarUrl && (
+          <motion.div variants={item} className="hidden lg:block">
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-4xl bg-accent/15 blur-2xl" />
+              <img
+                src={portfolio.avatarUrl}
+                alt={portfolio.name}
+                className="relative h-[420px] w-[300px] rounded-3xl border border-border object-cover"
+              />
+            </div>
+          </motion.div>
+        )}
       </motion.div>
     </section>
   );
