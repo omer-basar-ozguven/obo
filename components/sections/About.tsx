@@ -1,7 +1,7 @@
 import { ArrowUpRight, Building2 } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 import { Section } from "@/components/Section";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 
 export function About() {
   const { paragraphs, highlights, company } = portfolio.about;
@@ -16,19 +16,18 @@ export function About() {
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-3 gap-4">
+          <RevealGroup className="mt-10 grid grid-cols-3 gap-4" stagger={0.1}>
             {highlights.map((h) => (
-              <div
-                key={h.label}
-                className="rounded-2xl border border-border bg-surface/50 p-5"
-              >
-                <div className="font-display text-3xl font-bold text-gradient">
-                  {h.value}
+              <RevealItem key={h.label} direction="up">
+                <div className="rounded-2xl border border-border bg-surface/50 p-5">
+                  <div className="font-display text-3xl font-bold text-gradient">
+                    {h.value}
+                  </div>
+                  <div className="mt-1 text-sm text-muted">{h.label}</div>
                 </div>
-                <div className="mt-1 text-sm text-muted">{h.label}</div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Reveal>
 
         <Reveal direction="left" delay={0.1}>

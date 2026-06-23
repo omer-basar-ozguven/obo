@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import { ArrowUp } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 import { SocialIcon } from "@/components/SocialIcon";
@@ -5,7 +8,13 @@ import { SocialIcon } from "@/components/SocialIcon";
 export function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row">
+      <motion.div
+        className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ type: "spring", stiffness: 70, damping: 18 }}
+      >
         <div className="text-center sm:text-left">
           <p className="font-display text-lg font-bold tracking-tight">
             {portfolio.name}
@@ -24,7 +33,7 @@ export function Footer() {
               target={social.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
               aria-label={social.label}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted transition-colors hover:border-accent-soft hover:text-foreground"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-foreground"
             >
               <SocialIcon name={social.icon} className="h-4 w-4" />
             </a>
@@ -37,7 +46,7 @@ export function Footer() {
             <ArrowUp className="h-4 w-4" />
           </a>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

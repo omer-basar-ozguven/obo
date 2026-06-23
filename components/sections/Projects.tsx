@@ -6,6 +6,23 @@ import { motion } from "motion/react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { portfolio, type Project, type ProjectStatus, type ProjectType } from "@/data/portfolio";
 import { GithubIcon } from "@/components/icons";
+import { Reveal } from "@/components/Reveal";
+
+const cardsContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09 } },
+};
+
+const cardReveal = {
+  hidden: { opacity: 0, scale: 0.88, rotateX: 12, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotateX: 0,
+    y: 0,
+    transition: { type: "spring" as const, stiffness: 65, damping: 16, mass: 0.8 },
+  },
+};
 
 const statusStyles: Record<ProjectStatus, string> = {
   live: "border-accent-soft/40 bg-accent/10 text-accent-soft",
@@ -210,20 +227,17 @@ export function Projects() {
       id="projects"
       className="relative mx-auto w-full max-w-6xl px-6 py-24 sm:py-28"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-12"
-      >
-        <p className="mb-3 font-mono text-sm uppercase tracking-[0.25em] text-accent-soft">
-          Work
-        </p>
-        <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+      <Reveal className="mb-12">
+        <div className="mb-4 flex items-center gap-3">
+          <span className="h-px w-8 bg-accent" />
+          <p className="font-mono text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+            Work
+          </p>
+        </div>
+        <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           Selected projects
         </h2>
-      </motion.div>
+      </Reveal>
 
       <div className="relative">
         {/* Left fade */}
@@ -249,24 +263,30 @@ export function Projects() {
         </button>
 
         {/* Scrollable cards */}
-        <div
+        <motion.div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto"
           style={{
             scrollSnapType: "x mandatory",
             scrollbarWidth: "none",
+            perspective: "1200px",
           }}
+          variants={cardsContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
         >
           {portfolio.projects.map((project) => (
-            <div
+            <motion.div
               key={project.title}
               className="w-full shrink-0 lg:w-[calc(33.333%-16px)]"
               style={{ scrollSnapAlign: "start" }}
+              variants={cardReveal}
             >
               <ProjectCard project={project} />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Right fade */}
         <div

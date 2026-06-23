@@ -19,6 +19,21 @@ const item = {
   },
 };
 
+const wordContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
+};
+
+const wordItem = {
+  hidden: { opacity: 0, y: 48, rotate: 4 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    transition: { type: "spring" as const, stiffness: 80, damping: 14, mass: 0.8 },
+  },
+};
+
 export function Hero() {
   return (
     <section
@@ -79,10 +94,19 @@ export function Hero() {
           </motion.span>
 
           <motion.h1
-            variants={item}
+            variants={wordContainer}
             className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl"
+            style={{ overflow: "hidden" }}
           >
-            {portfolio.name}
+            {portfolio.name.split(" ").map((word, i) => (
+              <motion.span
+                key={i}
+                variants={wordItem}
+                style={{ display: "inline-block", marginRight: "0.22em" }}
+              >
+                {word}
+              </motion.span>
+            ))}
           </motion.h1>
 
           <motion.p

@@ -5,26 +5,29 @@ import type { ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
 
-const OFFSET = 28;
+const OFFSET = 48;
 
 function getVariants(direction: Direction): Variants {
   const offset = {
-    up: { y: OFFSET },
-    down: { y: -OFFSET },
-    left: { x: OFFSET },
+    up:    { y: OFFSET },
+    down:  { y: -OFFSET },
+    left:  { x: OFFSET },
     right: { x: -OFFSET },
-    none: {},
+    none:  {},
   }[direction];
 
   return {
-    hidden: { opacity: 0, ...offset },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-    },
+    hidden:  { opacity: 0, ...offset },
+    visible: { opacity: 1, x: 0, y: 0 },
   };
 }
+
+const spring = {
+  type: "spring" as const,
+  stiffness: 70,
+  damping: 18,
+  mass: 0.9,
+};
 
 export function Reveal({
   children,
@@ -44,17 +47,13 @@ export function Reveal({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ ...spring, delay }}
     >
       {children}
     </motion.div>
   );
 }
 
-/**
- * Wrapper that staggers its direct <Reveal> / motion children.
- * Use together with `RevealItem` for list/grid entrance effects.
- */
 export function RevealGroup({
   children,
   className,
@@ -93,7 +92,7 @@ export function RevealItem({
     <motion.div
       className={className}
       variants={getVariants(direction)}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      transition={spring}
     >
       {children}
     </motion.div>
