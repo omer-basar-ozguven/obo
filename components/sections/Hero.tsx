@@ -95,17 +95,20 @@ export function Hero() {
 
           <motion.h1
             variants={wordContainer}
-            className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl"
-            style={{ overflow: "hidden" }}
+            className="mt-6 font-display text-5xl font-bold leading-[1.15] tracking-tight sm:text-7xl md:text-8xl"
           >
             {portfolio.name.split(" ").map((word, i) => (
-              <motion.span
+              <span
                 key={i}
-                variants={wordItem}
-                style={{ display: "inline-block", marginRight: "0.22em" }}
+                style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom", marginRight: "0.22em", paddingTop: "0.1em" }}
               >
-                {word}
-              </motion.span>
+                <motion.span
+                  variants={wordItem}
+                  style={{ display: "inline-block" }}
+                >
+                  {word}
+                </motion.span>
+              </span>
             ))}
           </motion.h1>
 

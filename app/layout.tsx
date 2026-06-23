@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: `${portfolio.name} — ${portfolio.role}`,
+  title: portfolio.name,
   description: portfolio.summary,
   keywords: [
     portfolio.name,
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: portfolio.name }],
   openGraph: {
-    title: `${portfolio.name} — ${portfolio.role}`,
+    title: portfolio.name,
     description: portfolio.summary,
     type: "website",
     siteName: portfolio.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${portfolio.name} — ${portfolio.role}`,
+    title: portfolio.name,
     description: portfolio.summary,
   },
 };
