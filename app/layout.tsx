@@ -53,6 +53,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
+      {/* Runs synchronously before first paint to prevent theme flash */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='dark'?'dark':'light';}catch(e){}})();`,
+        }}
+      />
       <body className="min-h-full">{children}</body>
     </html>
   );

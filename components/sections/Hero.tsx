@@ -29,17 +29,23 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         <motion.div
           aria-hidden
-          className="absolute -left-32 top-10 h-112 w-md rounded-full bg-accent/25 blur-[120px]"
+          className="absolute -left-32 top-10 h-112 w-md rounded-full bg-accent/20 blur-[120px]"
           animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           aria-hidden
-          className="absolute -right-24 bottom-0 h-104 w-104 rounded-full bg-accent-2/20 blur-[120px]"
+          className="absolute -right-24 bottom-0 h-104 w-104 rounded-full bg-accent-2/15 blur-[120px]"
           animate={{ x: [0, -30, 0], y: [0, -40, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(124,92,255,0.12),transparent_60%)]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 50% -20%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%)",
+          }}
+        />
       </div>
 
       <motion.div
@@ -66,8 +72,8 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm text-muted backdrop-blur"
           >
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-2 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-2" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
             Available for new opportunities
           </motion.span>
@@ -98,7 +104,7 @@ export function Hero() {
             className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted"
           >
             <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-4 w-4 text-accent-soft" />
+              <MapPin className="h-4 w-4 text-accent" />
               {portfolio.location}
             </span>
             <span className="font-mono">{portfolio.role}</span>
@@ -114,7 +120,7 @@ export function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-6 py-3 font-medium text-foreground backdrop-blur transition-colors hover:border-accent-soft hover:text-accent-soft"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-6 py-3 font-medium text-foreground backdrop-blur transition-colors hover:border-accent hover:text-accent"
             >
               Get in touch
               <ArrowUpRight className="h-4 w-4" />
@@ -129,7 +135,7 @@ export function Hero() {
                 target={social.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface/50 text-muted transition-all hover:-translate-y-0.5 hover:border-accent-soft hover:text-foreground"
+                className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface/50 text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-foreground"
               >
                 <SocialIcon name={social.icon} className="h-5 w-5" />
               </a>
@@ -140,12 +146,11 @@ export function Hero() {
         {/* Desktop photo */}
         {portfolio.avatarUrl && (
           <motion.div variants={item} className="hidden lg:block">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-4xl bg-accent/15 blur-2xl" />
+            <div className="h-[460px] w-[345px] overflow-hidden rounded-3xl border-2 border-accent/40">
               <img
                 src={portfolio.avatarUrl}
                 alt={portfolio.name}
-                className="relative h-[420px] w-[300px] rounded-3xl border border-border object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
           </motion.div>

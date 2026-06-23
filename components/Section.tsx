@@ -20,14 +20,17 @@ export function Section({
       className={`relative mx-auto w-full max-w-6xl px-6 py-24 sm:py-28 ${className ?? ""}`}
     >
       {(eyebrow || title) && (
-        <Reveal className="mb-12">
+        <Reveal className="mb-14">
           {eyebrow && (
-            <p className="mb-3 font-mono text-sm uppercase tracking-[0.25em] text-accent-soft">
-              {eyebrow}
-            </p>
+            <div className="mb-4 flex items-center gap-3">
+              <span className="h-px w-8 bg-accent" />
+              <p className="font-mono text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+                {eyebrow}
+              </p>
+            </div>
           )}
           {title && (
-            <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+            <h2 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
               {title}
             </h2>
           )}

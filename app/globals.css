@@ -37,15 +37,29 @@
   }
 }
 
-:root {
-  --background: #07070b;
-  --foreground: #ededf2;
-  --muted: #9a9ab0;
-  --surface: #111119;
-  --border: #23232f;
-  --accent: #7c5cff;
-  --accent-soft: #a48dff;
-  --accent-2: #19d3c5;
+/* Dark theme — dark green / near-black (default) */
+:root,
+[data-theme="dark"] {
+  --background: #050d07;
+  --foreground: #ecfdf5;
+  --muted: #6b9e7a;
+  --surface: #091410;
+  --border: #163d23;
+  --accent: #22c55e;
+  --accent-soft: #4ade80;
+  --accent-2: #86efac;
+}
+
+/* Light theme — white / sage green */
+[data-theme="light"] {
+  --background: #f9fafb;
+  --foreground: #052e16;
+  --muted: #4b7c5b;
+  --surface: #f0fdf4;
+  --border: #bbf7d0;
+  --accent: #16a34a;
+  --accent-soft: #15803d;
+  --accent-2: #166534;
 }
 
 * {
@@ -64,9 +78,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Anchored sections sit below the sticky navbar */
+/* Small buffer for anchor scroll targets */
 section[id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 1.5rem;
 }
 
 ::selection {

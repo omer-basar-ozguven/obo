@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="lg:pr-16">
         <Hero />
         <About />
         <Projects />
