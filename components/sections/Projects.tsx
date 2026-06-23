@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion as m } from "motion/react";
 import { motion } from "motion/react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { portfolio, type Project, type ProjectStatus, type ProjectType } from "@/data/portfolio";
@@ -29,6 +30,9 @@ const typeLabels: Record<ProjectType, string> = {
 };
 
 function ProjectCard({ project }: { project: Project }) {
+  const hasRole = Boolean(project.role);
+  const [tab, setTab] = useState<"description" | "role">(hasRole ? "role" : "description");
+
   return (
     <motion.article
       whileHover={{ y: -6 }}
@@ -73,9 +77,38 @@ function ProjectCard({ project }: { project: Project }) {
       <h3 className="relative mt-5 font-display text-xl font-bold tracking-tight">
         {project.title}
       </h3>
-      <p className="relative mt-3 flex-1 leading-relaxed text-muted">
-        {project.description}
-      </p>
+      {hasRole && (
+        <div className="relative mt-3 flex gap-1">
+          {(["description", "role"] as const).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`rounded-full px-3 py-1 font-mono text-xs transition-colors ${
+                tab === t
+                  ? "bg-accent/15 text-accent"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              {t === "description" ? "Project" : "My Role"}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="relative mt-3 flex-1 overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
+          <m.p
+            key={hasRole ? tab : "desc"}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18 }}
+            className="leading-relaxed text-muted"
+          >
+            {tab === "role" && project.role ? project.role : project.description}
+          </m.p>
+        </AnimatePresence>
+      </div>
 
       {project.tech && project.tech.length > 0 && (
         <div className="relative mt-5 flex flex-wrap gap-2">

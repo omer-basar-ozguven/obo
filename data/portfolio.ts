@@ -21,6 +21,8 @@ export type Project = {
   description: string;
   /** Defaults to "product" when omitted */
   type?: ProjectType;
+  /** For consulting projects — displayed separately below the description */
+  role?: string;
   /** e.g. "iOS & Android", "B2B", "Open Source", "Side project" */
   tag?: string;
   status?: ProjectStatus;
@@ -172,6 +174,29 @@ export const portfolio: Portfolio = {
       iconUrl: "/icons/yukal_icon.png",
     },
     {
+      title: "Mole",
+      description:
+        "Private AI platform for underground utility detection from GPR survey data — runs a multi-model deep learning ensemble to automatically detect and geolocate buried utilities on an interactive map dashboard, deployed for government agencies like MEDAS.",
+      role: "Built the FastAPI backend pipeline, Supabase infrastructure, and key UI components for the client-facing dashboard.",
+      tag: "Web App",
+      status: "live",
+      type: "consulting",
+      tech: ["FastAPI", "Supabase", "Next.js", "Docker"],
+      accent: "🔍",
+    },
+    {
+      title: "Placemaking AI",
+      description:
+        "AI-driven real estate intelligence platform built on the largest data vault in placemaking — 106M+ POIs, consumer insights, cultural mapping, and sentiment analysis for landlords, developers, and urban planners.",
+      role: "Responsible for big data pipeline architecture, microservices development, and data science workflows.",
+      tag: "Web App",
+      status: "live",
+      type: "consulting",
+      tech: ["Python", "FastAPI", "LangChain", "SQL", "AWS", "Docker"],
+      liveUrl: "https://www.placemaking.ai/",
+      accent: "🏙️",
+    },
+    {
       title: "Banana Labs",
       description:
         "AI creative studio for generating UGC videos, product shoots, and images — powered by a multi-model architecture that runs several AI models in parallel so you can compare outputs instantly.",
@@ -197,7 +222,7 @@ export const portfolio: Portfolio = {
     },
     {
       category: "Backend & APIs",
-      items: ["Node.js", "Hono", "Express", "Fiber", "Django", "Firebase Functions"],
+      items: ["Node.js", "Hono", "Express", "Fiber", "FastAPI", "Firebase Functions"],
     },
     {
       category: "Languages",
