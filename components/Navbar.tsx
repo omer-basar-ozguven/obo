@@ -48,7 +48,7 @@ export function Navbar() {
       {/* ── Floating icon pill (desktop + tablet) ── */}
       <nav
         aria-label="Site navigation"
-        className="fixed right-6 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-1 rounded-full border border-border bg-surface/80 p-2 backdrop-blur-xl md:flex"
+        className="fixed right-6 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-1.5 rounded-full border border-border bg-surface/80 p-3 backdrop-blur-xl md:flex"
       >
         {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
           const isActive = active === href;
@@ -58,15 +58,15 @@ export function Navbar() {
               href={href}
               aria-label={label}
               title={label}
-              className={`group relative grid h-10 w-10 place-items-center rounded-full transition-all duration-200 ${
+              className={`group relative grid h-14 w-14 place-items-center rounded-full transition-all duration-200 ${
                 isActive
                   ? "bg-accent/20 text-accent"
                   : "text-muted hover:bg-foreground/8 hover:text-foreground"
               }`}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-5 w-5" />
               {/* Tooltip */}
-              <span className="pointer-events-none absolute right-12 whitespace-nowrap rounded-lg border border-border bg-surface px-3 py-1.5 font-mono text-xs text-foreground opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+              <span className="pointer-events-none absolute right-16 whitespace-nowrap rounded-lg border border-border bg-surface px-3 py-1.5 font-mono text-xs text-foreground opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                 {label}
               </span>
             </a>
@@ -74,13 +74,13 @@ export function Navbar() {
         })}
 
         {/* Divider */}
-        <span className="my-1 h-px w-6 bg-border" />
+        <span className="my-1 h-px w-8 bg-border" />
 
         {/* Theme toggle */}
         <button
           onClick={toggle}
           aria-label="Toggle theme"
-          className="grid h-10 w-10 place-items-center rounded-full text-muted transition-all hover:bg-foreground/8 hover:text-foreground"
+          className="grid h-14 w-14 place-items-center rounded-full text-muted transition-all hover:bg-foreground/8 hover:text-foreground"
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.span

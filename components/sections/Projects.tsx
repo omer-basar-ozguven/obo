@@ -22,11 +22,13 @@ const statusLabels: Record<ProjectStatus, string> = {
 const typeStyles: Record<ProjectType, string> = {
   product: "border-accent-soft/40 bg-accent/10 text-accent-soft",
   consulting: "border-teal-500/40 bg-teal-500/10 text-teal-400",
+  playground: "border-violet-500/40 bg-violet-500/10 text-violet-400",
 };
 
 const typeLabels: Record<ProjectType, string> = {
   product: "Product",
   consulting: "Consulting",
+  playground: "Playground",
 };
 
 function ProjectCard({ project }: { project: Project }) {

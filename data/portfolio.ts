@@ -14,7 +14,7 @@ export type SocialLink = {
 
 export type ProjectStatus = "live" | "finished" | "in-progress";
 
-export type ProjectType = "product" | "consulting";
+export type ProjectType = "product" | "consulting" | "playground";
 
 export type Project = {
   title: string;
@@ -94,7 +94,7 @@ export type Portfolio = {
 
 export const portfolio: Portfolio = {
   name: "Ömer Başar Özgüven",
-  role: "Software Engineer",
+  role: "Software & Product Engineer",
   tagline: "I build things that ship.",
   summary:
     "Co-founder of Bronix and full-stack engineer who turns ideas into real products — mobile apps, AI tools, and web platforms from zero to launch.",
@@ -103,7 +103,7 @@ export const portfolio: Portfolio = {
   resumeUrl: undefined,
   avatarUrl: "/icons/obo.jpeg",
   socials: [
-    { label: "GitHub", href: "https://github.com/yourhandle", icon: "github" },
+    { label: "GitHub", href: "https://github.com/omer-basar-ozguven", icon: "github" },
     {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/omerbasarozguven/",
@@ -205,6 +205,17 @@ export const portfolio: Portfolio = {
       tech: ["Next.js", "Express.js", "Supabase", "Fal.ai", "OpenRouter"],
       liveUrl: "https://bananalabs.co",
       iconUrl: "/icons/banana-labs-icon.png",
+    },
+    {
+      title: "SeriesStudio",
+      description:
+        "An agentic pipeline that turns a short series idea into a fully produced episodic video series — scripts, character sheets, storyboards, and rendered MP4 scenes, all generated autonomously. The only human input is a few paragraphs of an idea.",
+      tag: "Open Source",
+      status: "in-progress",
+      type: "playground",
+      tech: ["VoltAgent", "Docker"],
+      repoUrl: "https://github.com/omer-basar-ozguven/voltagent-series-studio",
+      accent: "🎬",
     },
   ],
   skills: [
