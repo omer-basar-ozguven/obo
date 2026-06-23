@@ -130,7 +130,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed right-0 top-0 z-50 flex h-screen w-72 flex-col border-l border-border bg-surface p-8 md:hidden"
+              className="fixed right-0 top-0 z-50 flex h-dvh w-72 flex-col border-l border-border bg-surface p-8 md:hidden"
             >
               <div className="flex items-center justify-between">
                 <a
