@@ -18,6 +18,15 @@ const DEVICON_MAP: Record<string, string> = {
   AWS: `${DEVICON_BASE}/amazonwebservices/amazonwebservices-plain-wordmark.svg`,
 };
 
+/** Custom icons: local assets or external URLs not covered by Simple Icons. */
+const CUSTOM_ICON_MAP: Record<string, string> = {
+  Apify: "https://apify.com/img/apify-logo/apify-symbol-200x200.svg",
+  VoltAgent: "https://avatars.githubusercontent.com/u/208561184?v=4",
+  OpenRouter: "/logos/openrouter-icon.svg",
+  "Fal.ai": "/logos/fal-ai-icon-seeklogo.svg",
+  "OpenAI API": "/logos/openai-icon.svg",
+};
+
 const TECH_ICON_MAP: Record<string, string> = {
   // Languages
   TypeScript: "typescript",
@@ -62,7 +71,6 @@ const TECH_ICON_MAP: Record<string, string> = {
   LangChain: "langchain",
   "Claude API": "anthropic",
   "Claude Code": "anthropic",
-  // OpenAI, Apify, Fal.ai not in Simple Icons — rendered text-only
 
   // Store / distribution
   "Google Play Console": "googleplay",
@@ -73,6 +81,7 @@ const TECH_ICON_MAP: Record<string, string> = {
 };
 
 export function getTechIconUrl(name: string): string | null {
+  if (CUSTOM_ICON_MAP[name]) return CUSTOM_ICON_MAP[name];
   if (DEVICON_MAP[name]) return DEVICON_MAP[name];
   const slug = TECH_ICON_MAP[name];
   if (!slug) return null;
