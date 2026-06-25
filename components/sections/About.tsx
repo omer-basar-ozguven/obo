@@ -16,14 +16,14 @@ export function About() {
             ))}
           </div>
 
-          <RevealGroup className="mt-10 grid grid-cols-3 gap-4" stagger={0.1}>
+          <RevealGroup className="mt-10 grid grid-cols-3 gap-3 sm:gap-4" stagger={0.1}>
             {highlights.map((h) => (
-              <RevealItem key={h.label} direction="up">
-                <div className="rounded-2xl border border-border bg-surface/50 p-5">
-                  <div className="font-display text-3xl font-bold text-gradient">
+              <RevealItem key={h.label} direction="up" className="h-full">
+                <div className="h-full rounded-2xl border border-border bg-surface/50 p-3 sm:p-5">
+                  <div className="font-display text-xl sm:text-3xl font-bold text-gradient leading-tight">
                     {h.value}
                   </div>
-                  <div className="mt-1 text-sm text-muted">{h.label}</div>
+                  <div className="mt-1 text-xs sm:text-sm text-muted">{h.label}</div>
                 </div>
               </RevealItem>
             ))}
