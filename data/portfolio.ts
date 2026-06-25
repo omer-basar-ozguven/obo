@@ -131,6 +131,18 @@ export const portfolio: Portfolio = {
   },
   projects: [
     {
+      title: "yükAl",
+      description:
+        "A Turkish freight marketplace that connects cargo owners with truck drivers. Post a shipment, get matched right away, and reach thousands of vehicles across all 81 provinces. Listing is free, and carriers pay through a subscription.",
+      tag: "iOS & Android · Web",
+      status: "live",
+      tech: ["Expo", "Express.js", "Next.js", "Supabase", "Railway", "OpenRouter"],
+      liveUrl: "https://www.yukal.net/",
+      appStoreUrl: "https://apps.apple.com/app/id1663676145",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.application.yukal",
+      iconUrl: "/icons/yukal_icon.png",
+    },
+    {
       title: "Walkable",
       description:
         "Walking navigation that color-codes streets by how walkable they are, so you can pick the safest route through any city. There's no account to sign up for, and your location never leaves your phone.",
@@ -160,18 +172,6 @@ export const portfolio: Portfolio = {
       tech: ["Flutter", "Firebase", "Railway", "Fal.ai"],
       appStoreUrl: "https://apps.apple.com/app/id6761188961",
       iconUrl: "https://www.bronixengineering.com/images/nextroom-app-icon.png",
-    },
-    {
-      title: "yükAl",
-      description:
-        "A Turkish freight marketplace that connects cargo owners with truck drivers. Post a shipment, get matched right away, and reach thousands of vehicles across all 81 provinces. Listing is free, and carriers pay through a subscription.",
-      tag: "iOS & Android · Web",
-      status: "live",
-      tech: ["Expo", "Express.js", "Next.js", "Supabase", "Railway", "OpenRouter"],
-      liveUrl: "https://www.yukal.net/",
-      appStoreUrl: "https://apps.apple.com/app/id1663676145",
-      playStoreUrl: "https://play.google.com/store/apps/details?id=com.application.yukal",
-      iconUrl: "/icons/yukal_icon.png",
     },
     {
       title: "Mole",
@@ -229,7 +229,7 @@ export const portfolio: Portfolio = {
     },
     {
       category: "Mobile",
-      items: ["Flutter", "Expo", "React Native", "Firebase SDK", "RevenueCat", "Google Play Console", "App Store Connect"],
+      items: ["Flutter", "Expo", "React Native", "Firebase SDK", "RevenueCat", "App Store Connect", "Google Play Console"],
     },
     {
       category: "Backend & APIs",
@@ -264,6 +264,24 @@ export const portfolio: Portfolio = {
       issuer: "Anthropic",
       year: "2026",
       certificateUrl: "https://verify.skilljar.com/c/zzocwpy8rytv",
+    },
+    {
+      name: "Claude Code in Action",
+      issuer: "Anthropic",
+      year: "2026",
+      certificateUrl: "https://verify.skilljar.com/c/gbexkvzt4wot",
+    },
+    {
+      name: "Introduction to Claude Cowork",
+      issuer: "Anthropic",
+      year: "2026",
+      certificateUrl: "https://verify.skilljar.com/c/hjkdiwia7x3j",
+    },
+    {
+      name: "AI Fluency: Framework & Foundations",
+      issuer: "Anthropic",
+      year: "2026",
+      certificateUrl: "https://verify.skilljar.com/c/ecr3zo5jddiw",
     },
   ],
 };
