@@ -40,12 +40,12 @@ export function Contact() {
 
           <motion.h2 variants={item} className="mx-auto mt-4 max-w-2xl font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
             Let&apos;s build something{" "}
-            <span className="text-gradient">great together</span>.
+            <span className="text-gradient">people actually use</span>.
           </motion.h2>
 
           <motion.p variants={item} className="mx-auto mt-5 max-w-xl text-lg text-muted">
-            Have a project in mind, a role to fill, or just want to say hi? My
-            inbox is always open.
+            Got a project, a role, or just want to talk shop? Send me an email
+            and I&apos;ll get back to you.
           </motion.p>
 
           <motion.div variants={item} className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

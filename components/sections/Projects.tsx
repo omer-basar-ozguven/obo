@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion as m } from "motion/react";
 import { motion } from "motion/react";
-import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { portfolio, type Project, type ProjectStatus, type ProjectType } from "@/data/portfolio";
+import { getTechIconUrl } from "@/lib/techIcons";
 import { GithubIcon } from "@/components/icons";
 import { Reveal } from "@/components/Reveal";
 
@@ -131,14 +132,29 @@ function ProjectCard({ project }: { project: Project }) {
 
       {project.tech && project.tech.length > 0 && (
         <div className="relative mt-5 flex flex-wrap gap-2">
-          {project.tech.map((t) => (
-            <span
-              key={t}
-              className="rounded-md bg-foreground/5 px-2.5 py-1 font-mono text-xs text-muted"
-            >
-              {t}
-            </span>
-          ))}
+          {project.tech.map((t) => {
+            const iconUrl = getTechIconUrl(t);
+            return (
+              <span
+                key={t}
+                className="inline-flex items-center gap-2 rounded-lg bg-foreground/5 px-3 py-1.5 font-mono text-sm text-muted"
+              >
+                {iconUrl && (
+                  <span className="inline-flex items-center justify-center rounded-[5px] bg-white p-[3px]">
+                    <img
+                      src={iconUrl}
+                      alt=""
+                      aria-hidden
+                      width={21}
+                      height={21}
+                      className="block shrink-0"
+                    />
+                  </span>
+                )}
+                {t}
+              </span>
+            );
+          })}
         </div>
       )}
 
@@ -191,37 +207,6 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export function Projects() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const updateScrollState = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-  }, []);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    updateScrollState();
-    el.addEventListener("scroll", updateScrollState, { passive: true });
-    window.addEventListener("resize", updateScrollState);
-    return () => {
-      el.removeEventListener("scroll", updateScrollState);
-      window.removeEventListener("resize", updateScrollState);
-    };
-  }, [updateScrollState]);
-
-  const scroll = (dir: "left" | "right") => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const firstCard = el.children[0] as HTMLElement | null;
-    const amount = firstCard ? firstCard.offsetWidth + 24 : el.clientWidth;
-    el.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
-  };
-
   return (
     <section
       id="projects"
@@ -239,77 +224,20 @@ export function Projects() {
         </h2>
       </Reveal>
 
-      <div className="relative">
-        {/* Left fade */}
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 transition-opacity duration-300"
-          style={{
-            background: "linear-gradient(to right, var(--background), transparent)",
-            opacity: canScrollLeft ? 1 : 0,
-          }}
-        />
-        {/* Left arrow */}
-        <button
-          onClick={() => scroll("left")}
-          disabled={!canScrollLeft}
-          aria-label="Scroll left"
-          className={`absolute -left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface/90 backdrop-blur-sm transition-all duration-200 ${
-            canScrollLeft
-              ? "text-foreground hover:border-accent-soft hover:text-accent-soft"
-              : "pointer-events-none opacity-0"
-          }`}
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-
-        {/* Scrollable cards */}
-        <motion.div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto"
-          style={{
-            scrollSnapType: "x mandatory",
-            scrollbarWidth: "none",
-            perspective: "1200px",
-          }}
-          variants={cardsContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-        >
-          {portfolio.projects.map((project) => (
-            <motion.div
-              key={project.title}
-              className="w-full shrink-0 lg:w-[calc(33.333%-16px)]"
-              style={{ scrollSnapAlign: "start" }}
-              variants={cardReveal}
-            >
-              <ProjectCard project={project} />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Right fade */}
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 transition-opacity duration-300"
-          style={{
-            background: "linear-gradient(to left, var(--background), transparent)",
-            opacity: canScrollRight ? 1 : 0,
-          }}
-        />
-        {/* Right arrow */}
-        <button
-          onClick={() => scroll("right")}
-          disabled={!canScrollRight}
-          aria-label="Scroll right"
-          className={`absolute -right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface/90 backdrop-blur-sm transition-all duration-200 ${
-            canScrollRight
-              ? "text-foreground hover:border-accent-soft hover:text-accent-soft"
-              : "pointer-events-none opacity-0"
-          }`}
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
+      <motion.div
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        style={{ perspective: "1200px" }}
+        variants={cardsContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        {portfolio.projects.map((project) => (
+          <motion.div key={project.title} variants={cardReveal} className="flex">
+            <ProjectCard project={project} />
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }
