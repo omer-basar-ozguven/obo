@@ -51,6 +51,8 @@ export type Education = {
   institution: string;
   period: string;
   url?: string;
+  /** Institution logo image URL, shown instead of the graduation-cap icon */
+  logoUrl?: string;
 };
 
 export type Certification = {
@@ -250,6 +252,7 @@ export const portfolio: Portfolio = {
       institution: "Bilkent University",
       period: "2016 – 2021",
       url: "https://www.bilkent.edu.tr/",
+      logoUrl: "/icons/bilkent-logo.png",
     },
   ],
   certifications: [

@@ -21,9 +21,19 @@ export function Education() {
                 className="relative overflow-hidden rounded-3xl border border-border bg-surface/50 p-7"
               >
                 <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-accent/10 blur-2xl" />
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15 text-accent-soft">
-                  <GraduationCap className="h-6 w-6" />
-                </span>
+                {edu.logoUrl ? (
+                  <span className="inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-white p-1.5">
+                    <img
+                      src={edu.logoUrl}
+                      alt={`${edu.institution} logo`}
+                      className="h-full w-full object-contain"
+                    />
+                  </span>
+                ) : (
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15 text-accent-soft">
+                    <GraduationCap className="h-6 w-6" />
+                  </span>
+                )}
                 <p className="mt-5 font-mono text-xs uppercase tracking-[0.2em] text-muted">
                   {edu.period}
                 </p>
@@ -53,35 +63,38 @@ export function Education() {
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-accent-soft">
               Certifications
             </h3>
-            {certifications.map((cert) => (
-              <div
-                key={cert.name}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface/50 px-6 py-5 transition-colors hover:border-accent-soft/50"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent-soft">
-                    <BadgeCheck className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="font-medium text-foreground">{cert.name}</p>
-                    <p className="mt-0.5 text-sm text-muted">
-                      {cert.issuer} · {cert.year}
-                    </p>
+            {[...certifications].reverse().map((cert) => {
+              const CardTag = cert.certificateUrl ? "a" : "div";
+              return (
+                <CardTag
+                  key={cert.name}
+                  {...(cert.certificateUrl
+                    ? {
+                        href: cert.certificateUrl,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        "aria-label": `View ${cert.name} certificate`,
+                      }
+                    : {})}
+                  className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface/50 px-6 py-5 transition-colors hover:border-accent-soft/50"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent-soft">
+                      <BadgeCheck className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <p className="font-medium text-foreground">{cert.name}</p>
+                      <p className="mt-0.5 text-sm text-muted">
+                        {cert.issuer} · {cert.year}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                {cert.certificateUrl && (
-                  <a
-                    href={cert.certificateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${cert.name} certificate`}
-                    className="shrink-0 text-muted transition-colors hover:text-accent-soft"
-                  >
-                    <ArrowUpRight className="h-5 w-5" />
-                  </a>
-                )}
-              </div>
-            ))}
+                  {cert.certificateUrl && (
+                    <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-colors group-hover:text-accent-soft" />
+                  )}
+                </CardTag>
+              );
+            })}
           </div>
         </Reveal>
       </div>
