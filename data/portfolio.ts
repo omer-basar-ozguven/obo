@@ -117,6 +117,7 @@ export const portfolio: Portfolio = {
     paragraphs: [
       "I'm a software engineer, and I co-founded Bronix, a product studio where I led engineering on more than a dozen consumer apps. I built all sorts of things there: couples tools, AI interior design, safe-walking navigation, a freight marketplace, and plenty more. Every one of them taught me something that I carried into the next.",
       "My stack is broad on purpose. Flutter and Expo for mobile, Next.js for web apps and admin dashboards, Go and Python for APIs and data pipelines, Firebase and Supabase on the backend, and more and more AI tooling like VoltAgent, OpenRouter, and Fal.ai. I've also worked on big data systems. Clean architecture matters to me, but shipping something people will actually benefit from, matters more.",
+      "I also work in a data-informed way, digging into product analytics and user funnels to find where people drop off or churn, then iterating on the product to fix it.",
     ],
     highlights: [
       { label: "Products shipped", value: "10+" },

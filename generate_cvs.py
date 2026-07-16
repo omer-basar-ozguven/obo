@@ -1,0 +1,404 @@
+"""
+Generate 4 tailored 1-page CVs for Ömer Başar Özgüven.
+Run: python3 generate_cvs.py
+"""
+
+from docx import Document
+from docx.shared import Pt, Inches, RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_ALIGN_VERTICAL
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
+import os
+
+NAME     = "Ömer Başar Özgüven"
+PHONE    = "+90 531 269 11 05"
+EMAIL    = "omerbasarozguven@gmail.com"
+WEBSITE  = "omerbasarozguven.com"
+LINKEDIN = "linkedin.com/in/omerbasarozguven"
+GITHUB   = "github.com/omer-basar-ozguven"
+OUT_DIR  = os.path.dirname(os.path.abspath(__file__))
+PHOTO    = os.path.join(OUT_DIR, "public", "icons", "obo.jpeg")
+
+GREEN    = (0x2E, 0x7D, 0x32)
+
+# Live / availability status shown next to each project name.
+PROJECT_STATUS = {
+    "YükAl":          "Live on iOS, Android & Web",
+    "Walkable":       "Live on iOS",
+    "Toxic Flamingo": "Live on iOS",
+    "NextRoom":       "Live on iOS",
+    "Banana Labs":    "Live on Web",
+    "Mole":           "Live on Web",
+    "Placemaking AI": "Live on Web",
+    "SeriesStudio":   "Open Source",
+}
+
+RESEARCH = {
+    "org":    "Bilkent University — Miniature Robotics Laboratory",
+    "period": "2018 – 2021",
+    "bullets": [
+        "Researched miniature modular robotics: foldable mechanisms and flexible spine module design.",
+        'Best Paper Award, TORK 2019, for "Flexible Spine Module Design for Foldable Modular Miniature Robots".',
+    ],
+}
+
+# ── low-level helpers ────────────────────────────────────────────────────────
+
+def sp(para, before=0, after=0):
+    para.paragraph_format.space_before = Pt(before)
+    para.paragraph_format.space_after  = Pt(after)
+
+def run(para, text, size=9.5, bold=False, italic=False, color=None):
+    r = para.add_run(text)
+    r.font.name  = "Calibri"
+    r.font.size  = Pt(size)
+    r.font.bold  = bold
+    r.font.italic = italic
+    if color:
+        r.font.color.rgb = RGBColor(*color)
+    return r
+
+def bottom_border(para, color="BBBBBB", sz="4"):
+    pPr  = para._p.get_or_add_pPr()
+    pBdr = OxmlElement("w:pBdr")
+    b    = OxmlElement("w:bottom")
+    b.set(qn("w:val"),   "single")
+    b.set(qn("w:sz"),    sz)
+    b.set(qn("w:space"), "1")
+    b.set(qn("w:color"), color)
+    pBdr.append(b)
+    pPr.append(pBdr)
+
+def right_tab(para, pos=9360):
+    pPr     = para._p.get_or_add_pPr()
+    tabs_el = OxmlElement("w:tabs")
+    tab     = OxmlElement("w:tab")
+    tab.set(qn("w:val"), "right")
+    tab.set(qn("w:pos"), str(pos))
+    tabs_el.append(tab)
+    pPr.append(tabs_el)
+
+# ── section-level helpers ────────────────────────────────────────────────────
+
+def section_header(doc, text):
+    p = doc.add_paragraph()
+    sp(p, before=4, after=1)
+    run(p, text.upper(), size=9, bold=True, color=(0x22, 0x22, 0x22))
+    bottom_border(p, color="BBBBBB", sz="4")
+
+def job_header(doc, title, org, date_str):
+    p = doc.add_paragraph()
+    sp(p, before=3, after=1)
+    right_tab(p)
+    run(p, title,        size=10,   bold=True)
+    run(p, "  ·  ",      size=10)
+    run(p, org,          size=10,   italic=True)
+    run(p, "\t" + date_str, size=9, color=(0x77, 0x77, 0x77))
+
+def bullet(doc, text):
+    p = doc.add_paragraph()
+    sp(p, before=1, after=0)
+    p.paragraph_format.left_indent       = Inches(0.22)
+    p.paragraph_format.first_line_indent = Inches(-0.15)
+    run(p, "•  " + text, size=9.5)
+
+def project_line(doc, name, desc, tech=None, status=None):
+    p = doc.add_paragraph()
+    sp(p, before=2, after=1)
+    run(p, name, size=9.5, bold=True)
+    if status:
+        run(p, "   " + status, size=8.5, bold=True, color=GREEN)
+    run(p, "", size=9.5).add_break()
+    run(p, desc, size=9.5)
+    if tech:
+        run(p, f"  —  {tech}", size=8.5, italic=True, color=(0x77, 0x77, 0x77))
+
+def skills_line(doc, category, items):
+    p = doc.add_paragraph()
+    sp(p, before=2, after=2)
+    run(p, category + ":  ", size=9.5, bold=True)
+    run(p, ", ".join(items),  size=9.5)
+
+# ── document builder ─────────────────────────────────────────────────────────
+
+def build_cv(filename, role_title, summary, experience, projects, skills, certs=None, research=None):
+    doc = Document()
+
+    for sec in doc.sections:
+        sec.top_margin    = Inches(0.45)
+        sec.bottom_margin = Inches(0.45)
+        sec.left_margin   = Inches(0.70)
+        sec.right_margin  = Inches(0.70)
+
+    normal = doc.styles["Normal"]
+    normal.font.name = "Calibri"
+    normal.font.size = Pt(10)
+    normal.paragraph_format.line_spacing = 1.0
+    normal.paragraph_format.space_after  = Pt(0)
+
+    # Header: name + role on the left, photo on the right
+    table = doc.add_table(rows=1, cols=2)
+    table.autofit = False
+    table.allow_autofit = False
+    left, right = table.cell(0, 0), table.cell(0, 1)
+    left.width, right.width = Inches(5.75), Inches(1.25)
+
+    pn = left.paragraphs[0]
+    sp(pn, 0, 1)
+    run(pn, NAME, size=22, bold=True, color=(0x1A, 0x1A, 0x1A))
+    pr = left.add_paragraph()
+    sp(pr, 0, 0)
+    run(pr, role_title, size=11, color=(0x44, 0x44, 0x44))
+
+    if os.path.exists(PHOTO):
+        right.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        pimg = right.paragraphs[0]
+        pimg.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        sp(pimg, 0, 0)
+        pimg.add_run().add_picture(PHOTO, width=Inches(1.1))
+
+    # Contact line (full width, under the header)
+    p = doc.add_paragraph()
+    sp(p, 2, 4)
+    bottom_border(p, color="333333", sz="8")
+    run(p, f"{WEBSITE}  |  {PHONE}  |  {EMAIL}  |  {LINKEDIN}  |  {GITHUB}",
+        size=8.5, color=(0x44, 0x44, 0x44))
+
+    # Summary
+    section_header(doc, "Summary")
+    p = doc.add_paragraph()
+    sp(p, 1, 1)
+    run(p, summary, size=9.5)
+
+    # Experience
+    section_header(doc, "Experience")
+    for exp in experience:
+        job_header(doc, exp["title"], exp["org"], exp["date"])
+        for b in exp["bullets"]:
+            bullet(doc, b)
+
+    # Projects
+    section_header(doc, "Selected Projects")
+    for proj in projects:
+        project_line(doc, proj["name"], proj["desc"], proj.get("tech"),
+                     PROJECT_STATUS.get(proj["name"]))
+
+    # Skills
+    section_header(doc, "Skills")
+    for cat, items in skills:
+        skills_line(doc, cat, items)
+
+    # Education
+    section_header(doc, "Education")
+    p = doc.add_paragraph()
+    sp(p, 1, 0)
+    run(p, "B.Sc. Mechanical Engineering", size=9.5, bold=True)
+    run(p, "  ·  Bilkent University, Ankara, Turkey  ·  2016 – 2021", size=9.5)
+
+    p = doc.add_paragraph()
+    sp(p, 1, 0)
+    run(p, "High School Diploma (International Baccalaureate)", size=9.5, bold=True)
+    run(p, "  ·  TED Ankara College, Ankara, Turkey  ·  2012 – 2016", size=9.5)
+
+    if certs:
+        p = doc.add_paragraph()
+        sp(p, 2, 0)
+        run(p, "Certifications:  ", size=9.5, bold=True)
+        run(p, "  |  ".join(certs), size=9.5)
+
+    # Research
+    if research:
+        section_header(doc, "Research")
+        job_header(doc, "Undergraduate Researcher", research["org"], research["period"])
+        for b in research["bullets"]:
+            bullet(doc, b)
+
+    path = os.path.join(OUT_DIR, filename)
+    doc.save(path)
+    print(f"✓  {filename}")
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# CV 1 — FULL-STACK ENGINEER
+# ════════════════════════════════════════════════════════════════════════════
+build_cv(
+    filename="CV_FullStack_OmerBasarOzguven.docx",
+    role_title="Full-Stack Software Engineer",
+    summary=(
+        "Full-stack engineer and former co-founder of Bronix, where I shipped 10+ consumer products end-to-end. "
+        "Proficient across the full web stack, from React/Next.js frontends to Node.js/Go/Python backends and "
+        "Firebase/Supabase data layers, delivering enterprise-scale systems and integrating AI APIs into production."
+    ),
+    experience=[
+        {
+            "title": "Co-Founder & Lead Engineer",
+            "org": "Bronix",
+            "date": "2021 – 2026",
+            "bullets": [
+                "Architected and shipped 10+ consumer products, iterating on product analytics and user funnels.",
+                "Built web platforms and admin dashboards with Next.js, React, and Tailwind CSS.",
+                "Developed REST APIs and backend services in Node.js (Express/Hono) and Go (Fiber).",
+                "Managed cloud infrastructure (Firebase, Supabase, AWS) and integrated AI via OpenRouter and Fal.ai.",
+            ],
+        },
+        {
+            "title": "Consulting Engineer",
+            "org": "Mole  ·  Placemaking AI",
+            "date": "2022 – 2026",
+            "bullets": [
+                "Mole: Built the FastAPI backend and Supabase infrastructure for an AI underground-utility detection platform used by government agencies (MEDAS).",
+                "Placemaking AI: Built microservices processing 106M+ points of interest for a real estate intelligence platform.",
+            ],
+        },
+    ],
+    projects=[
+        {"name": "YükAl",       "desc": "Turkish freight marketplace matching cargo owners with truck drivers across all 81 provinces.", "tech": "Expo, Express.js, Next.js, Supabase"},
+        {"name": "Banana Labs",  "desc": "AI creative studio for UGC videos, product shoots, and images with parallel model comparison.",   "tech": "Next.js, Express, Supabase, Fal.ai"},
+        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.",           "tech": "Flutter, Firebase, Railway, Fal.ai"},
+        {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest with consumer insights and analytics.", "tech": "Python, FastAPI, LangChain, AWS"},
+        {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.",         "tech": "VoltAgent, Docker"},
+    ],
+    skills=[
+        ("Languages",   ["TypeScript", "JavaScript", "Go", "Python", "Dart", "SQL"]),
+        ("Frontend",    ["React", "Next.js", "Tailwind CSS", "shadcn/ui"]),
+        ("Backend",     ["Node.js", "Express", "Hono", "Go Fiber", "FastAPI"]),
+        ("Data & Infra",["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
+        ("AI & Agents", ["OpenRouter", "Fal.ai", "VoltAgent", "LangChain", "Claude API", "OpenAI API"]),
+    ],
+    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
+    research=RESEARCH,
+)
+
+# ════════════════════════════════════════════════════════════════════════════
+# CV 2 — MOBILE ENGINEER
+# ════════════════════════════════════════════════════════════════════════════
+build_cv(
+    filename="CV_Mobile_OmerBasarOzguven.docx",
+    role_title="Mobile Engineer  ·  Flutter & Expo",
+    summary=(
+        "Mobile engineer and former co-founder of Bronix, where I shipped 6+ Flutter and Expo apps to App Store and "
+        "Google Play. Expert in Flutter/Dart with production experience in Firebase integration, RevenueCat "
+        "subscription billing, and full iOS/Android lifecycle management. Comfortable owning the web and backend layers "
+        "supporting each mobile product."
+    ),
+    experience=[
+        {
+            "title": "Co-Founder & Lead Mobile Engineer",
+            "org": "Bronix",
+            "date": "2021 – 2026",
+            "bullets": [
+                "Shipped 6+ production Flutter and Expo apps across iOS and Android, from architecture to App Store launch.",
+                "Integrated RevenueCat for subscription billing and in-app purchase management.",
+                "Built Firebase-backed real-time features: Auth, Firestore, Cloud Messaging, and Storage.",
+                "Embedded AI features including on-device Fal.ai image generation and agentic navigation via VoltAgent.",
+                "Managed App Store and Google Play releases; analyzed user funnels and churn to prioritize iterations.",
+            ],
+        },
+    ],
+    projects=[
+        {"name": "Walkable",       "desc": "Walking navigation that color-codes streets by how safe they are, with no account and location kept entirely on device.",        "tech": "Flutter, VoltAgent, Firebase, Supabase"},
+        {"name": "Toxic Flamingo", "desc": "A to-do app with attitude that nags and roasts you into finishing tasks, with Rage Mode, app blocking, and a Pomodoro timer.",       "tech": "Flutter, Firebase"},
+        {"name": "NextRoom",       "desc": "AI interior design that turns one photo into a photorealistic redesign across 12+ curated styles or a custom prompt.",     "tech": "Flutter, Firebase, Railway, Fal.ai"},
+        {"name": "YükAl",          "desc": "Freight marketplace connecting cargo owners with truck drivers across all 81 provinces, with instant matching.",       "tech": "Expo, Express.js, Supabase"},
+    ],
+    skills=[
+        ("Mobile",       ["Flutter", "Dart", "Expo", "React Native", "iOS", "Android"]),
+        ("Mobile Tools", ["Firebase SDK", "RevenueCat", "App Store Connect", "Google Play Console", "FCM"]),
+        ("Backend",      ["Node.js", "Express", "FastAPI", "Firebase Functions", "Supabase"]),
+        ("Languages",    ["Dart", "TypeScript", "JavaScript", "Python"]),
+        ("AI & Agents",  ["Fal.ai", "VoltAgent", "OpenRouter", "Claude API"]),
+    ],
+    research=RESEARCH,
+)
+
+# ════════════════════════════════════════════════════════════════════════════
+# CV 3 — PRODUCT ENGINEER
+# ════════════════════════════════════════════════════════════════════════════
+build_cv(
+    filename="CV_Product_OmerBasarOzguven.docx",
+    role_title="Product Engineer",
+    summary=(
+        "Product engineer and former co-founder of Bronix, where I owned the full product loop: define, build, launch, iterate. "
+        "Shipped 10+ consumer products across mobile and web, including subscription apps, AI tools, and enterprise platforms. "
+        "Strong cross-stack engineering execution paired with product intuition for what to build, when, and why."
+    ),
+    experience=[
+        {
+            "title": "Co-Founder & Product Engineer",
+            "org": "Bronix",
+            "date": "2021 – 2026",
+            "bullets": [
+                "Defined product vision and led full-stack engineering for 10+ consumer apps across mobile (Flutter/Expo) and web (Next.js).",
+                "Shipped subscription products with RevenueCat billing; managed App Store and Google Play lifecycle.",
+                "Built AI-powered tools integrating OpenRouter, Fal.ai, and VoltAgent for generative and agentic workflows.",
+                "Owned roadmap and engineering from zero to launch, iterating on product analytics, funnels, and churn.",
+                "Delivered two enterprise consulting products — AI utility detection for government and a 106M+ POI real estate intelligence platform.",
+            ],
+        },
+    ],
+    projects=[
+        {"name": "YükAl",        "desc": "Freight marketplace connecting cargo owners with truck drivers nationwide, with free listing and a carrier subscription model.", "tech": "Expo, Next.js, Supabase"},
+        {"name": "Walkable",     "desc": "Privacy-first walking navigation that color-codes streets by safety, with no account and location that never leaves the device.",                "tech": "Flutter, VoltAgent, Firebase"},
+        {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images, generating across several models in parallel for comparison.",                          "tech": "Next.js, Fal.ai, Supabase"},
+        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from a single photo using 12+ curated styles or a custom prompt.",                  "tech": "Flutter, Firebase, Fal.ai"},
+        {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR survey data with a deep-learning ensemble; deployed at agencies like MEDAS.",       "tech": "FastAPI, Supabase, Next.js"},
+    ],
+    skills=[
+        ("Product",     ["Product Definition", "Roadmapping", "User Research", "App Store Optimisation", "Subscription Monetisation"]),
+        ("Engineering", ["Flutter", "Expo", "Next.js", "React", "Node.js", "Go", "Python", "FastAPI"]),
+        ("AI & Agents", ["VoltAgent", "OpenRouter", "Fal.ai", "LangChain", "Claude API", "OpenAI API"]),
+        ("Infra",       ["Firebase", "Supabase", "PostgreSQL", "Docker", "AWS", "Railway", "Vercel"]),
+    ],
+    research=RESEARCH,
+)
+
+# ════════════════════════════════════════════════════════════════════════════
+# CV 4 — BACKEND ENGINEER
+# ════════════════════════════════════════════════════════════════════════════
+build_cv(
+    filename="CV_Backend_OmerBasarOzguven.docx",
+    role_title="Backend Engineer  ·  Go · Python · Node.js",
+    summary=(
+        "Backend engineer and former co-founder of Bronix, with production experience building APIs, data pipelines, "
+        "and microservices in Go, Python, and Node.js. Delivered backend systems for 10+ consumer products as well "
+        "as enterprise platforms, including a microservices pipeline processing 106M+ POIs and an AI inference "
+        "pipeline for government-used underground utility detection."
+    ),
+    experience=[
+        {
+            "title": "Co-Founder & Lead Backend Engineer",
+            "org": "Bronix",
+            "date": "2021 – 2026",
+            "bullets": [
+                "Designed and built REST APIs for consumer mobile apps in Node.js (Express/Hono) and Go (Fiber).",
+                "Managed PostgreSQL databases, Redis caching, and Docker deployments on Railway and AWS.",
+                "Built serverless functions and event pipelines powering product analytics and behavioral data.",
+            ],
+        },
+        {
+            "title": "Consulting Engineer — Backend & Data",
+            "org": "Mole  ·  Placemaking AI",
+            "date": "2022 – 2026",
+            "bullets": [
+                "Placemaking AI: Architected microservices backend processing 106M+ POIs with Python, FastAPI, LangChain, PostGIS, and AWS. Designed ETL pipelines and data science workflows.",
+                "Mole: Built FastAPI inference pipeline and Supabase infrastructure for a deep-learning ensemble detecting underground utilities from GPR survey data, deployed for MEDAS.",
+            ],
+        },
+    ],
+    projects=[
+        {"name": "YükAl",        "desc": "Freight marketplace backend: Express.js REST API on Railway backed by Supabase and PostgreSQL, powering matching and subscriptions.",           "tech": "Node.js, Express, Supabase, PostgreSQL"},
+        {"name": "Placemaking AI", "desc": "Microservices backend and ETL pipelines processing 106M+ points of interest for a real estate intelligence platform.", "tech": "Python, FastAPI, PostGIS, AWS"},
+        {"name": "Banana Labs",  "desc": "Backend orchestrating parallel AI model calls across providers, with job queuing, result caching, and side-by-side delivery.",              "tech": "Express.js, Supabase, Fal.ai, OpenRouter"},
+        {"name": "SeriesStudio", "desc": "Agentic pipeline orchestrating multi-step video generation, chaining scripts, storyboards, and rendered MP4 scenes.", "tech": "VoltAgent, Docker"},
+    ],
+    skills=[
+        ("Languages",    ["Go", "Python", "TypeScript", "JavaScript", "SQL"]),
+        ("Frameworks",   ["Go Fiber", "FastAPI", "Express.js", "Hono", "Node.js"]),
+        ("Databases",    ["PostgreSQL", "PostGIS", "Redis", "MongoDB", "Supabase", "Firebase"]),
+        ("DevOps & Cloud", ["Docker", "AWS", "Railway", "Vercel", "Firebase Functions", "Supabase Edge Functions"]),
+        ("AI & Data",    ["LangChain", "VoltAgent", "OpenRouter", "Fal.ai", "Apify", "ETL Pipelines"]),
+    ],
+    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
+    research=RESEARCH,
+)
