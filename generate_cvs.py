@@ -1,5 +1,5 @@
 """
-Generate 4 tailored 1-page CVs for Ömer Başar Özgüven.
+Generate 6 tailored 1-page CVs for Ömer Başar Özgüven.
 Run: python3 generate_cvs.py
 """
 
@@ -247,16 +247,17 @@ build_cv(
             "org": "Mole  ·  Placemaking AI",
             "date": "2022 – 2026",
             "bullets": [
-                "Mole: Built the FastAPI backend and Supabase infrastructure for an AI underground-utility detection platform used by government agencies (MEDAS).",
-                "Placemaking AI: Built microservices processing 106M+ points of interest for a real estate intelligence platform.",
+                "Mole: Built the FastAPI backend and Supabase infra for an AI GPR utility-detection platform (MEDAS).",
+                "Placemaking AI: Built microservices processing 106M+ points of interest.",
             ],
         },
     ],
     projects=[
         {"name": "YükAl",       "desc": "Turkish freight marketplace matching cargo owners with truck drivers across all 81 provinces.", "tech": "Expo, Express.js, Next.js, Supabase"},
-        {"name": "Banana Labs",  "desc": "AI creative studio for UGC videos, product shoots, and images with parallel model comparison.",   "tech": "Next.js, Express, Supabase, Fal.ai"},
+        {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images.",   "tech": "Next.js, Express, Supabase, Fal.ai"},
         {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.",           "tech": "Flutter, Firebase, Railway, Fal.ai"},
-        {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest with consumer insights and analytics.", "tech": "Python, FastAPI, LangChain, AWS"},
+        {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest.", "tech": "Python, FastAPI, LangChain, AWS"},
+        {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR data with a deep-learning ensemble (MEDAS).", "tech": "FastAPI, Supabase, Next.js"},
         {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.",         "tech": "VoltAgent, Docker"},
     ],
     skills=[
@@ -333,7 +334,6 @@ build_cv(
                 "Shipped subscription products with RevenueCat billing; managed App Store and Google Play lifecycle.",
                 "Built AI-powered tools integrating OpenRouter, Fal.ai, and VoltAgent for generative and agentic workflows.",
                 "Owned roadmap and engineering from zero to launch, iterating on product analytics, funnels, and churn.",
-                "Delivered two enterprise consulting products — AI utility detection for government and a 106M+ POI real estate intelligence platform.",
             ],
         },
     ],
@@ -342,7 +342,6 @@ build_cv(
         {"name": "Walkable",     "desc": "Privacy-first walking navigation that color-codes streets by safety, with no account and location that never leaves the device.",                "tech": "Flutter, VoltAgent, Firebase"},
         {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images, generating across several models in parallel for comparison.",                          "tech": "Next.js, Fal.ai, Supabase"},
         {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from a single photo using 12+ curated styles or a custom prompt.",                  "tech": "Flutter, Firebase, Fal.ai"},
-        {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR survey data with a deep-learning ensemble; deployed at agencies like MEDAS.",       "tech": "FastAPI, Supabase, Next.js"},
     ],
     skills=[
         ("Product",     ["Product Definition", "Roadmapping", "User Research", "App Store Optimisation", "Subscription Monetisation"]),
@@ -381,14 +380,15 @@ build_cv(
             "org": "Mole  ·  Placemaking AI",
             "date": "2022 – 2026",
             "bullets": [
-                "Placemaking AI: Architected microservices backend processing 106M+ POIs with Python, FastAPI, LangChain, PostGIS, and AWS. Designed ETL pipelines and data science workflows.",
-                "Mole: Built FastAPI inference pipeline and Supabase infrastructure for a deep-learning ensemble detecting underground utilities from GPR survey data, deployed for MEDAS.",
+                "Placemaking AI: Architected microservices processing 106M+ POIs, with ETL and data science pipelines.",
+                "Mole: Built a FastAPI inference pipeline for a deep-learning GPR utility-detection model (MEDAS).",
             ],
         },
     ],
     projects=[
         {"name": "YükAl",        "desc": "Freight marketplace backend: Express.js REST API on Railway backed by Supabase and PostgreSQL, powering matching and subscriptions.",           "tech": "Node.js, Express, Supabase, PostgreSQL"},
         {"name": "Placemaking AI", "desc": "Microservices backend and ETL pipelines processing 106M+ points of interest for a real estate intelligence platform.", "tech": "Python, FastAPI, PostGIS, AWS"},
+        {"name": "Mole",         "desc": "AI inference backend detecting underground utilities from GPR data with a deep-learning ensemble.", "tech": "FastAPI, Supabase, Docker"},
         {"name": "Banana Labs",  "desc": "Backend orchestrating parallel AI model calls across providers, with job queuing, result caching, and side-by-side delivery.",              "tech": "Express.js, Supabase, Fal.ai, OpenRouter"},
         {"name": "SeriesStudio", "desc": "Agentic pipeline orchestrating multi-step video generation, chaining scripts, storyboards, and rendered MP4 scenes.", "tech": "VoltAgent, Docker"},
     ],
@@ -398,6 +398,109 @@ build_cv(
         ("Databases",    ["PostgreSQL", "PostGIS", "Redis", "MongoDB", "Supabase", "Firebase"]),
         ("DevOps & Cloud", ["Docker", "AWS", "Railway", "Vercel", "Firebase Functions", "Supabase Edge Functions"]),
         ("AI & Data",    ["LangChain", "VoltAgent", "OpenRouter", "Fal.ai", "Apify", "ETL Pipelines"]),
+    ],
+    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
+    research=RESEARCH,
+)
+
+# ════════════════════════════════════════════════════════════════════════════
+# CV 5 — SOFTWARE ENGINEER (broad generalist)
+# ════════════════════════════════════════════════════════════════════════════
+build_cv(
+    filename="CV_SoftwareEngineer_OmerBasarOzguven.docx",
+    role_title="Software Engineer",
+    summary=(
+        "Software engineer and former co-founder of Bronix, where I shipped 10+ products end-to-end across mobile, "
+        "web, and backend. Versatile across the stack, from Flutter/Expo and Next.js to Go/Python/Node APIs and cloud "
+        "infrastructure, and comfortable owning features from design to production, including modern AI integrations."
+    ),
+    experience=[
+        {
+            "title": "Co-Founder & Software Engineer",
+            "org": "Bronix",
+            "date": "2021 – 2026",
+            "bullets": [
+                "Shipped 10+ consumer products end-to-end across iOS, Android, and web, from architecture to release.",
+                "Built mobile apps in Flutter and Expo, and web platforms and dashboards in Next.js and React.",
+                "Developed backend APIs and services in Node.js, Go, and Python on PostgreSQL, Firebase, and Supabase.",
+                "Integrated AI capabilities (OpenRouter, Fal.ai, VoltAgent) and iterated using product analytics and user funnels.",
+            ],
+        },
+        {
+            "title": "Consulting Engineer",
+            "org": "Mole  ·  Placemaking AI",
+            "date": "2022 – 2026",
+            "bullets": [
+                "Placemaking AI: Built microservices and data pipelines processing 106M+ points of interest.",
+                "Mole: Built a FastAPI inference backend for a deep-learning GPR utility-detection platform (MEDAS).",
+            ],
+        },
+    ],
+    projects=[
+        {"name": "YükAl",        "desc": "Turkish freight marketplace matching cargo owners with truck drivers across all 81 provinces.", "tech": "Expo, Express.js, Next.js, Supabase"},
+        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.", "tech": "Flutter, Firebase, Railway, Fal.ai"},
+        {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images.", "tech": "Next.js, Express, Supabase, Fal.ai"},
+        {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest.", "tech": "Python, FastAPI, LangChain, AWS"},
+        {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR data with a deep-learning ensemble (MEDAS).", "tech": "FastAPI, Supabase, Next.js"},
+        {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.", "tech": "VoltAgent, Docker"},
+    ],
+    skills=[
+        ("Languages",     ["TypeScript", "JavaScript", "Python", "Go", "Dart", "SQL"]),
+        ("Backend & APIs", ["Node.js", "Go Fiber", "FastAPI", "Express", "Hono"]),
+        ("Web & Mobile",  ["React", "Next.js", "Flutter", "Expo", "React Native"]),
+        ("Data & Infra",  ["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
+        ("AI & Agents",   ["VoltAgent", "LangChain", "OpenRouter", "Fal.ai", "Claude API", "OpenAI API"]),
+    ],
+    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
+    research=RESEARCH,
+)
+
+# ════════════════════════════════════════════════════════════════════════════
+# CV 6 — AI ENGINEER (AI application / agent engineer)
+# ════════════════════════════════════════════════════════════════════════════
+build_cv(
+    filename="CV_AIEngineer_OmerBasarOzguven.docx",
+    role_title="AI Engineer  ·  LLMs & Agents",
+    summary=(
+        "AI engineer and former co-founder of Bronix who ships AI-powered products: agents, LLM integrations, and "
+        "generative media. Built agentic pipelines with VoltAgent and integrated Claude, OpenAI, and Fal.ai into "
+        "consumer apps, and I build fast with AI-assisted development using Cursor and Claude."
+    ),
+    experience=[
+        {
+            "title": "Co-Founder & AI Engineer",
+            "org": "Bronix",
+            "date": "2021 – 2026",
+            "bullets": [
+                "Shipped AI-powered features across 10+ consumer products: generative image/video, chat, and agentic flows.",
+                "Integrated LLM and generative APIs (Claude, OpenAI, OpenRouter, Fal.ai) into mobile and web apps.",
+                "Built agentic systems with VoltAgent orchestrating multi-step, tool-using pipelines.",
+                "Built the mobile apps and SeriesStudio pipeline using AI-assisted development with Cursor and Claude.",
+            ],
+        },
+        {
+            "title": "Consulting Engineer — AI & Data",
+            "org": "Mole  ·  Placemaking AI",
+            "date": "2022 – 2026",
+            "bullets": [
+                "Mole: Built a FastAPI inference pipeline for a deep-learning GPR utility-detection model (MEDAS).",
+            ],
+        },
+    ],
+    projects=[
+        {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.", "tech": "VoltAgent, Docker"},
+        {"name": "Banana Labs",  "desc": "AI creative studio generating videos, product shoots, and images across several models in parallel.", "tech": "Fal.ai, OpenRouter, Next.js, Supabase"},
+        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.", "tech": "Fal.ai, Flutter, Firebase"},
+        {"name": "Walkable",     "desc": "Navigation app using an agentic pipeline to color-code streets by walkability and safety.", "tech": "VoltAgent, Flutter, Firebase"},
+        {"name": "Mole",         "desc": "AI inference backend detecting underground utilities from GPR data with a deep-learning ensemble.", "tech": "FastAPI, Supabase, Docker"},
+        {"name": "Placemaking AI", "desc": "Real estate intelligence over 106M+ points of interest, with LangChain data pipelines and analysis.", "tech": "Python, FastAPI, LangChain, AWS"},
+    ],
+    skills=[
+        ("AI & Agents",     ["VoltAgent", "LangChain", "Claude API", "OpenAI API", "OpenRouter", "Fal.ai", "Apify"]),
+        ("AI Workflows",    ["Agents", "Tool Use", "RAG", "Prompt Engineering", "Structured Output", "Generative Media"]),
+        ("AI-Assisted Dev", ["Cursor", "Claude Code"]),
+        ("Languages",       ["Python", "TypeScript", "JavaScript", "Dart", "Go", "SQL"]),
+        ("Backend & Infra", ["FastAPI", "Node.js", "PostgreSQL", "Supabase", "Firebase", "Docker", "AWS", "Railway"]),
     ],
     certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
     research=RESEARCH,
