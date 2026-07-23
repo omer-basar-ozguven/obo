@@ -148,9 +148,6 @@ def build_cv(filename, role_title, summary, experience, projects, skills, certs=
     pn = left.paragraphs[0]
     sp(pn, 0, 1)
     run(pn, NAME, size=22, bold=True, color=(0x1A, 0x1A, 0x1A))
-    pr = left.add_paragraph()
-    sp(pr, 0, 0)
-    run(pr, role_title, size=11, color=(0x44, 0x44, 0x44))
 
     if os.path.exists(PHOTO):
         right.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
@@ -227,13 +224,15 @@ build_cv(
     filename="CV_FullStack_OmerBasarOzguven.docx",
     role_title="Full-Stack Software Engineer",
     summary=(
-        "Full-stack engineer and former co-founder of Bronix, where I shipped 10+ consumer products end-to-end. "
-        "Proficient across the full web stack, from React/Next.js frontends to Node.js/Go/Python backends and "
-        "Firebase/Supabase data layers, delivering enterprise-scale systems and integrating AI APIs into production."
+        "Full stack engineer and one of the founders of Bronix, where I spent five years shipping more than ten "
+        "consumer products from first commit to launch. I work across the entire web stack, building React and "
+        "Next.js frontends on top of Node.js, Go, and Python services with Firebase or Supabase behind them. I have "
+        "taken enterprise scale platforms to production and built practical AI features into apps people use every "
+        "day. I move quickly, own what I build, and would rather ship something real than polish something forever."
     ),
     experience=[
         {
-            "title": "Co-Founder & Lead Engineer",
+            "title": "Co-Founder & Lead Software Engineer",
             "org": "Bronix",
             "date": "2021 – 2026",
             "bullets": [
@@ -279,14 +278,15 @@ build_cv(
     filename="CV_Mobile_OmerBasarOzguven.docx",
     role_title="Mobile Engineer  ·  Flutter & Expo",
     summary=(
-        "Mobile engineer and former co-founder of Bronix, where I shipped 6+ Flutter and Expo apps to App Store and "
-        "Google Play. Expert in Flutter/Dart with production experience in Firebase integration, RevenueCat "
-        "subscription billing, and full iOS/Android lifecycle management. Comfortable owning the web and backend layers "
-        "supporting each mobile product."
+        "Mobile engineer and one of the founders of Bronix, where I shipped more than six Flutter and Expo apps to "
+        "the App Store and Google Play. I know Flutter and Dart deeply, from Firebase integration and RevenueCat "
+        "subscriptions to the full release cycle on both iOS and Android. When a product needs a backend or a web "
+        "dashboard, I build that too, so nothing stalls waiting on someone else. Enough launches have taught me that "
+        "the last ten percent is where the real work hides."
     ),
     experience=[
         {
-            "title": "Co-Founder & Lead Mobile Engineer",
+            "title": "Co-Founder & Lead Software Engineer",
             "org": "Bronix",
             "date": "2021 – 2026",
             "bullets": [
@@ -322,13 +322,15 @@ build_cv(
     filename="CV_Product_OmerBasarOzguven.docx",
     role_title="Product Engineer",
     summary=(
-        "Product engineer and former co-founder of Bronix, where I owned the full product loop: define, build, launch, iterate. "
-        "Shipped 10+ consumer products across mobile and web, including subscription apps, AI tools, and enterprise platforms. "
-        "Strong cross-stack engineering execution paired with product intuition for what to build, when, and why."
+        "Product engineer and one of the founders of Bronix, where I owned the full loop of defining, building, "
+        "launching, and iterating on consumer software. I have shipped more than ten products across mobile and web, "
+        "including subscription apps, AI tools, and enterprise platforms. I pair hands on engineering across the "
+        "stack with a real sense of what to build next and why it matters. I watch how people actually use a "
+        "product, and I let that decide what gets built and what gets cut."
     ),
     experience=[
         {
-            "title": "Co-Founder & Product Engineer",
+            "title": "Co-Founder & Lead Software Engineer",
             "org": "Bronix",
             "date": "2021 – 2026",
             "bullets": [
@@ -362,14 +364,16 @@ build_cv(
     filename="CV_Backend_OmerBasarOzguven.docx",
     role_title="Backend Engineer  ·  Go · Python · Node.js",
     summary=(
-        "Backend engineer and former co-founder of Bronix, with production experience building APIs, data pipelines, "
-        "and microservices in Go, Python, and Node.js. Delivered backend systems for 10+ consumer products as well "
-        "as enterprise platforms, including a microservices pipeline processing 106M+ POIs and an AI inference "
-        "pipeline for government-used underground utility detection."
+        "Backend engineer and one of the founders of Bronix, with years of production experience building APIs, data "
+        "pipelines, and microservices in Go, Python, and Node.js. I have delivered backend systems for more than ten "
+        "consumer products as well as enterprise platforms, including a pipeline that processes over 106 million "
+        "points of interest and an AI inference service used by government teams for underground utility detection. I "
+        "design for scale and reliability, but I keep things simple enough that the next person can actually maintain "
+        "them. Performance problems are the kind I genuinely enjoy chasing down."
     ),
     experience=[
         {
-            "title": "Co-Founder & Lead Backend Engineer",
+            "title": "Co-Founder & Lead Software Engineer",
             "org": "Bronix",
             "date": "2021 – 2026",
             "bullets": [
@@ -413,13 +417,15 @@ build_cv(
     filename="CV_SoftwareEngineer_OmerBasarOzguven.docx",
     role_title="Software Engineer",
     summary=(
-        "Software engineer and former co-founder of Bronix, where I shipped 10+ products end-to-end across mobile, "
-        "web, and backend. Versatile across the stack, from Flutter/Expo and Next.js to Go/Python/Node APIs and cloud "
-        "infrastructure, and comfortable owning features from design to production, including modern AI integrations."
+        "Software engineer and one of the founders of Bronix, where I shipped more than ten products end to end "
+        "across mobile, web, and backend. I am comfortable everywhere in the stack, from Flutter and Next.js to Go, "
+        "Python, and Node services running on cloud infrastructure. I like owning a feature from the first sketch all "
+        "the way to production, AI integrations included. Five years of building products with small teams has taught "
+        "me to be pragmatic about what actually needs building."
     ),
     experience=[
         {
-            "title": "Co-Founder & Software Engineer",
+            "title": "Co-Founder & Lead Software Engineer",
             "org": "Bronix",
             "date": "2021 – 2026",
             "bullets": [
@@ -465,13 +471,15 @@ build_cv(
     filename="CV_AIEngineer_OmerBasarOzguven.docx",
     role_title="AI Engineer  ·  LLMs & Agents",
     summary=(
-        "AI engineer and former co-founder of Bronix who ships AI-powered products: agents, LLM integrations, and "
-        "generative media. Built agentic pipelines with VoltAgent and integrated Claude, OpenAI, and Fal.ai into "
-        "consumer apps, and I build fast with AI-assisted development using Cursor and Claude."
+        "AI engineer and one of the founders of Bronix, where I build AI powered products spanning agents, LLM "
+        "integrations, and generative media. I have built agentic pipelines with VoltAgent and put Claude, OpenAI, "
+        "and Fal.ai to work inside real consumer apps. I also ship fast using AI assisted development with Cursor and "
+        "Claude, which keeps my output well above what the headcount suggests. I stay close to the models as they "
+        "change, because half the advantage is knowing what just became possible."
     ),
     experience=[
         {
-            "title": "Co-Founder & AI Engineer",
+            "title": "Co-Founder & Lead Software Engineer",
             "org": "Bronix",
             "date": "2021 – 2026",
             "bullets": [
