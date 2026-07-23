@@ -200,6 +200,16 @@ export const portfolio: Portfolio = {
       accent: "🏙️",
     },
     {
+      title: "Next2Me",
+      description:
+        "A relationship app that gives couples one shared space to stay close every day: streaks, a shared drawing board, a couple calendar, 3,000+ conversation questions, swipe-to-match on movies, food, and activities, and a private encrypted chat. One partner upgrades, both get premium.",
+      tag: "iOS",
+      status: "live",
+      tech: ["Flutter", "Firebase", "Railway", "OpenRouter"],
+      appStoreUrl: "https://apps.apple.com/app/next2me-couple-games-quiz/id6761013065",
+      iconUrl: "/icons/next2me-logo.jpeg",
+    },
+    {
       title: "Banana Labs",
       description:
         "An AI creative studio for making UGC videos, product shoots, and images. It runs several AI models in parallel, so you can generate a few versions and compare them side by side.",

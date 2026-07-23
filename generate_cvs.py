@@ -28,6 +28,7 @@ PROJECT_STATUS = {
     "Walkable":       "Live on iOS",
     "Toxic Flamingo": "Live on iOS",
     "NextRoom":       "Live on iOS",
+    "Next2Me":        "Live on iOS",
     "Banana Labs":    "Live on Web",
     "Mole":           "Live on Web",
     "Placemaking AI": "Live on Web",
@@ -300,6 +301,7 @@ build_cv(
     projects=[
         {"name": "Walkable",       "desc": "Walking navigation that color-codes streets by how safe they are, with no account and location kept entirely on device.",        "tech": "Flutter, VoltAgent, Firebase, Supabase"},
         {"name": "Toxic Flamingo", "desc": "A to-do app with attitude that nags and roasts you into finishing tasks, with Rage Mode, app blocking, and a Pomodoro timer.",       "tech": "Flutter, Firebase"},
+        {"name": "Next2Me",        "desc": "Couples app with daily streaks, a shared drawing board, 3,000+ conversation questions, swipe-to-match on movies and activities, and private encrypted chat. One subscription unlocks premium for both partners.", "tech": "Flutter, Firebase, Railway, OpenRouter"},
         {"name": "NextRoom",       "desc": "AI interior design that turns one photo into a photorealistic redesign across 12+ curated styles or a custom prompt.",     "tech": "Flutter, Firebase, Railway, Fal.ai"},
         {"name": "YükAl",          "desc": "Freight marketplace connecting cargo owners with truck drivers across all 81 provinces, with instant matching.",       "tech": "Expo, Express.js, Supabase"},
     ],
@@ -340,6 +342,7 @@ build_cv(
     projects=[
         {"name": "YükAl",        "desc": "Freight marketplace connecting cargo owners with truck drivers nationwide, with free listing and a carrier subscription model.", "tech": "Expo, Next.js, Supabase"},
         {"name": "Walkable",     "desc": "Privacy-first walking navigation that color-codes streets by safety, with no account and location that never leaves the device.",                "tech": "Flutter, VoltAgent, Firebase"},
+        {"name": "Next2Me",      "desc": "Couples relationship app with daily streaks, conversation questions, swipe-to-match on movies and activities, and private chat. Unique shared-subscription model where one partner upgrading unlocks premium for both.", "tech": "Flutter, Firebase, OpenRouter"},
         {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images, generating across several models in parallel for comparison.",                          "tech": "Next.js, Fal.ai, Supabase"},
         {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from a single photo using 12+ curated styles or a custom prompt.",                  "tech": "Flutter, Firebase, Fal.ai"},
     ],
@@ -478,22 +481,14 @@ build_cv(
                 "Built the mobile apps and SeriesStudio pipeline using AI-assisted development with Cursor and Claude.",
             ],
         },
-        {
-            "title": "Consulting Engineer — AI & Data",
-            "org": "Mole  ·  Placemaking AI",
-            "date": "2022 – 2026",
-            "bullets": [
-                "Mole: Built a FastAPI inference pipeline for a deep-learning GPR utility-detection model (MEDAS).",
-            ],
-        },
     ],
     projects=[
-        {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.", "tech": "VoltAgent, Docker"},
-        {"name": "Banana Labs",  "desc": "AI creative studio generating videos, product shoots, and images across several models in parallel.", "tech": "Fal.ai, OpenRouter, Next.js, Supabase"},
-        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.", "tech": "Fal.ai, Flutter, Firebase"},
-        {"name": "Walkable",     "desc": "Navigation app using an agentic pipeline to color-code streets by walkability and safety.", "tech": "VoltAgent, Flutter, Firebase"},
-        {"name": "Mole",         "desc": "AI inference backend detecting underground utilities from GPR data with a deep-learning ensemble.", "tech": "FastAPI, Supabase, Docker"},
-        {"name": "Placemaking AI", "desc": "Real estate intelligence over 106M+ points of interest, with LangChain data pipelines and analysis.", "tech": "Python, FastAPI, LangChain, AWS"},
+        {"name": "SeriesStudio",   "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output. Built with Cursor.", "tech": "VoltAgent, Docker"},
+        {"name": "Banana Labs",    "desc": "AI creative studio generating videos, product shoots, and images across several models in parallel. Built with Cursor.", "tech": "Fal.ai, OpenRouter, Next.js, Supabase"},
+        {"name": "NextRoom",       "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt. Built with Claude Code.", "tech": "Fal.ai, Flutter, Firebase"},
+        {"name": "Walkable",       "desc": "Navigation app using an agentic pipeline to color-code streets by walkability and safety. Built with Cursor & Claude Code.", "tech": "VoltAgent, Flutter, Firebase"},
+        {"name": "Next2Me",        "desc": "Couples app with AI-powered conversation questions via OpenRouter, daily streaks, swipe-to-match on movies and activities, and private encrypted chat. Built with Cursor.", "tech": "Flutter, Firebase, Railway, OpenRouter"},
+        {"name": "Toxic Flamingo", "desc": "A to-do app that uses AI to nag and roast you into finishing tasks, with Rage Mode, app blocking, and a Pomodoro timer. Built with Cursor.", "tech": "Flutter, Firebase"},
     ],
     skills=[
         ("AI & Agents",     ["VoltAgent", "LangChain", "Claude API", "OpenAI API", "OpenRouter", "Fal.ai", "Apify"]),
