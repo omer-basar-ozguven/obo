@@ -115,20 +115,20 @@ export const portfolio: Portfolio = {
   ],
   about: {
     paragraphs: [
-      "I'm a software engineer, and I co-founded Bronix, a product studio where I led engineering on more than a dozen consumer apps. I built all sorts of things there: couples tools, AI interior design, safe-walking navigation, a freight marketplace, and plenty more. Every one of them taught me something that I carried into the next.",
+      "I'm a software engineer, and I co-founded Bronix, a software studio that has completed more than 50 engineering projects. I led engineering on more than a dozen of our own consumer apps there. I built all sorts of things there: couples tools, AI interior design, safe-walking navigation, a freight marketplace, and plenty more. Every one of them taught me something that I carried into the next.",
       "My stack is broad on purpose. Flutter and Expo for mobile, Next.js for web apps and admin dashboards, Go and Python for APIs and data pipelines, Firebase and Supabase on the backend, and more and more AI tooling like VoltAgent, OpenRouter, and Fal.ai. I've also worked on big data systems. Clean architecture matters to me, but shipping something people will actually benefit from, matters more.",
       "I also work in a data-informed way, digging into product analytics and user funnels to find where people drop off or churn, then iterating on the product to fix it.",
     ],
     highlights: [
+      { label: "Projects completed", value: "50+" },
       { label: "Products shipped", value: "10+" },
-      { label: "Platforms", value: "Mobile & Web" },
       { label: "Available", value: "Now" },
     ],
     company: {
       name: "Bronix",
       role: "Previously · Co-Founder",
       blurb:
-        "The product studio I co-founded and ran engineering for. We shipped subscription mobile apps and AI tools built on Flutter, Expo, and Next.js, and I owned the whole thing from architecture decisions down to the App Store release.",
+        "The software studio I co-founded and ran engineering for. We completed 50+ software engineering projects, including our own subscription mobile apps and AI tools built on Flutter, Expo, and Next.js, and I owned the whole thing from architecture decisions down to the App Store release.",
       url: "https://bronixengineering.com",
     },
   },

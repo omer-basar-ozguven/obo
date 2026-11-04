@@ -1,13 +1,13 @@
-import { GraduationCap, BadgeCheck, ArrowUpRight } from "lucide-react";
+import { GraduationCap, /* BadgeCheck, */ ArrowUpRight } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 
 export function Education() {
-  const { education, certifications } = portfolio;
+  const { education /* , certifications */ } = portfolio;
 
   return (
-    <Section id="education" eyebrow="Background" title="Education & certifications">
+    <Section id="education" eyebrow="Background" title="Education" /* "Education & certifications" */>
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Education */}
         <Reveal direction="up">
@@ -57,7 +57,7 @@ export function Education() {
           </div>
         </Reveal>
 
-        {/* Certifications */}
+        {/* Certifications (temporarily hidden)
         <Reveal direction="left" delay={0.1}>
           <div className="space-y-4">
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-accent-soft">
@@ -97,6 +97,7 @@ export function Education() {
             })}
           </div>
         </Reveal>
+        */}
       </div>
     </Section>
   );

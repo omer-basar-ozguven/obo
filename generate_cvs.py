@@ -233,7 +233,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix",
+            "org": "Bronix  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Architected and shipped 10+ consumer products, iterating on product analytics and user funnels.",
@@ -253,17 +253,17 @@ build_cv(
         },
     ],
     projects=[
+        {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest.", "tech": "Python, FastAPI, LangChain, AWS"},
+        {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR data with a deep-learning ensemble (MEDAS).", "tech": "FastAPI, Supabase, Next.js"},
         {"name": "YükAl",       "desc": "Turkish freight marketplace matching cargo owners with truck drivers across all 81 provinces.", "tech": "Expo, Express.js, Next.js, Supabase"},
         {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images.",   "tech": "Next.js, Express, Supabase, Fal.ai"},
         {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.",           "tech": "Flutter, Firebase, Railway, Fal.ai"},
-        {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest.", "tech": "Python, FastAPI, LangChain, AWS"},
-        {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR data with a deep-learning ensemble (MEDAS).", "tech": "FastAPI, Supabase, Next.js"},
         {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.",         "tech": "VoltAgent, Docker"},
     ],
     skills=[
         ("Languages",   ["TypeScript", "JavaScript", "Go", "Python", "Dart", "SQL"]),
         ("Frontend",    ["React", "Next.js", "Tailwind CSS", "shadcn/ui"]),
-        ("Backend",     ["Node.js", "Express", "Hono", "Go Fiber", "FastAPI"]),
+        ("Backend",     ["Node.js", "Express", "Hono", "Go Fiber", "FastAPI", "Django"]),
         ("Data & Infra",["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents", ["OpenRouter", "Fal.ai", "VoltAgent", "LangChain", "Claude API", "OpenAI API"]),
     ],
@@ -287,7 +287,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix",
+            "org": "Bronix  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Shipped 6+ production Flutter and Expo apps across iOS and Android, from architecture to App Store launch.",
@@ -331,7 +331,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix",
+            "org": "Bronix  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Defined product vision and led full-stack engineering for 10+ consumer apps across mobile (Flutter/Expo) and web (Next.js).",
@@ -374,7 +374,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix",
+            "org": "Bronix  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Designed and built REST APIs for consumer mobile apps in Node.js (Express/Hono) and Go (Fiber).",
@@ -393,15 +393,15 @@ build_cv(
         },
     ],
     projects=[
-        {"name": "YükAl",        "desc": "Freight marketplace backend: Express.js REST API on Railway backed by Supabase and PostgreSQL, powering matching and subscriptions.",           "tech": "Node.js, Express, Supabase, PostgreSQL"},
         {"name": "Placemaking AI", "desc": "Microservices backend and ETL pipelines processing 106M+ points of interest for a real estate intelligence platform.", "tech": "Python, FastAPI, PostGIS, AWS"},
         {"name": "Mole",         "desc": "AI inference backend detecting underground utilities from GPR data with a deep-learning ensemble.", "tech": "FastAPI, Supabase, Docker"},
+        {"name": "YükAl",        "desc": "Freight marketplace backend: Express.js REST API on Railway backed by Supabase and PostgreSQL, powering matching and subscriptions.",           "tech": "Node.js, Express, Supabase, PostgreSQL"},
         {"name": "Banana Labs",  "desc": "Backend orchestrating parallel AI model calls across providers, with job queuing, result caching, and side-by-side delivery.",              "tech": "Express.js, Supabase, Fal.ai, OpenRouter"},
         {"name": "SeriesStudio", "desc": "Agentic pipeline orchestrating multi-step video generation, chaining scripts, storyboards, and rendered MP4 scenes.", "tech": "VoltAgent, Docker"},
     ],
     skills=[
         ("Languages",    ["Go", "Python", "TypeScript", "JavaScript", "SQL"]),
-        ("Frameworks",   ["Go Fiber", "FastAPI", "Express.js", "Hono", "Node.js"]),
+        ("Frameworks",   ["Go Fiber", "FastAPI", "Django", "Express.js", "Hono", "Node.js"]),
         ("Databases",    ["PostgreSQL", "PostGIS", "Redis", "MongoDB", "Supabase", "Firebase"]),
         ("DevOps & Cloud", ["Docker", "AWS", "Railway", "Vercel", "Firebase Functions", "Supabase Edge Functions"]),
         ("AI & Data",    ["LangChain", "VoltAgent", "OpenRouter", "Fal.ai", "Apify", "ETL Pipelines"]),
@@ -426,7 +426,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix",
+            "org": "Bronix  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Shipped 10+ consumer products end-to-end across iOS, Android, and web, from architecture to release.",
@@ -447,15 +447,15 @@ build_cv(
     ],
     projects=[
         {"name": "YükAl",        "desc": "Turkish freight marketplace matching cargo owners with truck drivers across all 81 provinces.", "tech": "Expo, Express.js, Next.js, Supabase"},
-        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.", "tech": "Flutter, Firebase, Railway, Fal.ai"},
-        {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images.", "tech": "Next.js, Express, Supabase, Fal.ai"},
         {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest.", "tech": "Python, FastAPI, LangChain, AWS"},
         {"name": "Mole",         "desc": "AI platform detecting underground utilities from GPR data with a deep-learning ensemble (MEDAS).", "tech": "FastAPI, Supabase, Next.js"},
         {"name": "SeriesStudio", "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output.", "tech": "VoltAgent, Docker"},
+        {"name": "Banana Labs",  "desc": "AI creative studio for videos, product shoots, and images.", "tech": "Next.js, Express, Supabase, Fal.ai"},
+        {"name": "NextRoom",     "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt.", "tech": "Flutter, Firebase, Railway, Fal.ai"},
     ],
     skills=[
         ("Languages",     ["TypeScript", "JavaScript", "Python", "Go", "Dart", "SQL"]),
-        ("Backend & APIs", ["Node.js", "Go Fiber", "FastAPI", "Express", "Hono"]),
+        ("Backend & APIs", ["Node.js", "Go Fiber", "FastAPI", "Django", "Express", "Hono"]),
         ("Web & Mobile",  ["React", "Next.js", "Flutter", "Expo", "React Native"]),
         ("Data & Infra",  ["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents",   ["VoltAgent", "LangChain", "OpenRouter", "Fal.ai", "Claude API", "OpenAI API"]),
@@ -480,7 +480,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix",
+            "org": "Bronix  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Shipped AI-powered features across 10+ consumer products: generative image/video, chat, and agentic flows.",
