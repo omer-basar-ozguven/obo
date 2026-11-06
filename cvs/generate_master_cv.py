@@ -1,7 +1,7 @@
 """
 Generate the master CV for Ömer Başar Özgüven: one role-agnostic CV covering everything.
-Outputs CV_OmerBasarOzguven.docx and, when LibreOffice is available, CV_OmerBasarOzguven.pdf.
-Run: python3 generate_master_cv.py
+Outputs docx/CV_OmerBasarOzguven.docx and, when LibreOffice is available, pdf/CV_OmerBasarOzguven.pdf.
+Run: python3 cvs/generate_master_cv.py
 """
 
 import os
@@ -23,7 +23,9 @@ LINKEDIN = "linkedin.com/in/omerbasarozguven"
 GITHUB   = "github.com/omer-basar-ozguven"
 LOCATION = "Turkey  ·  Open to relocation and remote"
 
-OUT_DIR  = os.path.dirname(os.path.abspath(__file__))
+CVS_DIR  = os.path.dirname(os.path.abspath(__file__))
+DOCX_DIR = os.path.join(CVS_DIR, "docx")
+PDF_DIR  = os.path.join(CVS_DIR, "pdf")
 FILENAME = "CV_OmerBasarOzguven.docx"
 
 # Arial renders as metric-identical Liberation Sans in LibreOffice, so Word and the PDF match.
@@ -41,14 +43,10 @@ SKILL_INDENT = Inches(1.2)
 # ── content ──────────────────────────────────────────────────────────────────
 
 SUMMARY = (
-    "Software engineer with five years of building and shipping real products. As one of the founders of Bronix, "
-    "a software studio that has completed more than 50 engineering projects, I led engineering on more than ten of "
-    "our own consumer apps across iOS, Android, and the web, including a freight marketplace with over 10,000 "
-    "registered carriers. Alongside that, I consulted on enterprise systems: big data "
-    "pipelines over 106 million points of interest for Placemaking AI, and an AI inference backend for underground "
-    "utility detection used by government agencies. I am equally at home in Flutter, Next.js, Go, Python, and cloud "
-    "infrastructure, and lately much of my work centers on LLMs and agentic systems. I care about owning outcomes "
-    "and do my best work where engineering and product meet."
+    "Software engineer with five years of building and shipping real products, from mobile apps to AI agent "
+    "systems. As a consulting engineer I built TypeScript agent harnesses and microservices for Placemaking AI and "
+    "web3 clients, and as one of the founders of Bronix I led engineering on more than ten of our own products. I "
+    "care about owning outcomes and do my best work where engineering and product meet."
 )
 
 HIGHLIGHTS = [
@@ -61,40 +59,51 @@ HIGHLIGHTS = [
     "Best Paper Award, TORK 2019, for research on foldable modular miniature robots.",
 ]
 
-EXPERIENCE = [
-    {
-        "title": "Co-Founder & Lead Software Engineer",
-        "org": "Bronix",
-        "date": "2021 – 2026",
-        "bullets": [
-            "Led engineering for 10+ of the studio's own consumer products, taking each from architecture to "
-            "launch on the App Store, Google Play, and the web.",
-            "Built mobile apps in Flutter and Expo with Firebase (Auth, Firestore, Cloud Messaging, Storage), "
-            "RevenueCat subscriptions, and full iOS and Android release management.",
-            "Designed REST APIs and services in Node.js (Express, Hono), Go (Fiber), and Python (FastAPI) on "
-            "PostgreSQL, Redis, Supabase, and Firebase, deployed with Docker on Railway and AWS.",
-            "Shipped AI features to production: LLM integrations through OpenRouter, Claude, and OpenAI, generative "
-            "image and video with Fal.ai, and multi step agentic pipelines with VoltAgent.",
-            "Built web platforms and admin dashboards in Next.js, React, and Tailwind CSS, and used AI assisted "
-            "development (Cursor, Claude Code) to keep a very small team shipping fast.",
-            "Used product analytics and funnel analysis to find where users dropped off or churned, and turned "
-            "those findings into roadmap decisions.",
-        ],
-    },
-    {
-        "title": "Consulting Engineer",
-        "org": "Mole  ·  Placemaking AI",
-        "date": "2022 – 2026",
-        "bullets": [
-            "Placemaking AI: Owned big data pipeline architecture, microservices, and data science workflows for a "
-            "real estate intelligence platform built on 106M+ points of interest, consumer insights, and sentiment "
-            "data (Python, FastAPI, LangChain, AWS).",
-            "Mole: Built the FastAPI inference pipeline, Supabase infrastructure, and key dashboard components for a "
-            "platform that runs a deep learning ensemble on GPR survey data to locate buried pipes and cables, used "
-            "by government agencies such as MEDAS.",
-        ],
-    },
-]
+CONSULTING = {
+    "title": "Consulting Engineer",
+    "date": "2022 – 2026",
+    "clients": [
+        {
+            "name": "Placemaking AI",
+            "blurb": "Real estate intelligence, 106M+ points of interest",
+            "bullets": [
+                "Built TypeScript agent harnesses with tool calling, agent loops, and structured outputs over the "
+                "POI data.",
+                "Designed AI tools and modules that expose the platform's data to users and to other services.",
+                "Built the microservices behind the AI layer, plus the big data pipelines and data science workflows "
+                "feeding it (Python, FastAPI, LangChain, AWS).",
+            ],
+        },
+        {
+            "name": "Web3 clients",
+            "blurb": "Numerous consulting projects",
+            "bullets": [
+                "Led the microservices and LLM based AI tools over EVM and Solana data, in TypeScript and Python.",
+                "Worked with P2P protocols: libp2p, IPFS, and WebRTC.",
+            ],
+        },
+        {
+            "name": "Mole",
+            "blurb": "AI utility detection used by government agencies",
+            "bullets": [
+                "Built FastAPI inference and Supabase infrastructure for a deep learning ensemble on GPR survey data.",
+            ],
+        },
+    ],
+}
+
+FOUNDER = {
+    "title": "Co-Founder & Lead Software Engineer",
+    "date": "2021 – 2026",
+    "org": "Bronix Software Inc.  ·  50+ completed projects",
+    "bullets": [
+        "Built VoltAgent agent harnesses with tool calling, multi step loops, context management, and structured "
+        "outputs.",
+        "Shipped LLM features across 10+ apps via OpenRouter, Claude, and OpenAI, with retries, timeouts, model "
+        "fallbacks, and graceful degradation when a provider fails.",
+        "Led engineering on 10+ products from architecture to launch on the App Store, Google Play, and the web.",
+    ],
+}
 
 PRODUCTS = [
     {
@@ -165,6 +174,7 @@ SKILLS = [
                         "Supabase Edge Functions"]),
     ("Data & Infra",   ["PostgreSQL", "PostGIS", "Redis", "MongoDB", "Firebase", "Supabase", "Docker", "AWS",
                         "Google Cloud", "Railway", "Vercel"]),
+    ("P2P & Web3",     ["libp2p", "IPFS", "WebRTC", "EVM", "Solana"]),
     ("AI & Agents",    ["VoltAgent", "LangChain", "Claude API", "OpenAI API", "OpenRouter", "Fal.ai", "Apify",
                         "RAG", "Tool Use", "Structured Output", "Prompt Engineering"]),
     ("AI Dev Tools",   ["Cursor", "Claude Code"]),
@@ -175,14 +185,6 @@ SKILLS = [
 EDUCATION = [
     {"degree": "B.Sc. Mechanical Engineering", "school": "Bilkent University, Ankara", "date": "2016 – 2021"},
     {"degree": "International Baccalaureate Diploma", "school": "TED Ankara College, Ankara", "date": "2012 – 2016"},
-]
-
-CERTIFICATIONS = [
-    ("Claude Code 101",                     "https://verify.skilljar.com/c/q7s5bqdyhtj7"),
-    ("Claude Platform 101",                 "https://verify.skilljar.com/c/zzocwpy8rytv"),
-    ("Claude Code in Action",               "https://verify.skilljar.com/c/gbexkvzt4wot"),
-    ("Introduction to Claude Cowork",       "https://verify.skilljar.com/c/hjkdiwia7x3j"),
-    ("AI Fluency: Framework & Foundations", "https://verify.skilljar.com/c/ecr3zo5jddiw"),
 ]
 
 RESEARCH = {
@@ -322,6 +324,34 @@ def skill_row(doc, category, items):
     run(p, category + "\t", size=9.5, bold=True, color=NAVY)
     run(p, ", ".join(i.replace(" ", "\u00a0") for i in items), size=9.5)
 
+def client_header(doc, name, blurb, before=5):
+    p = doc.add_paragraph()
+    spacing(p, before=before, after=1)
+    p.paragraph_format.keep_with_next = True
+    run(p, name, size=10.5, bold=True, color=INK)
+    if blurb:
+        run(p, "   " + blurb, size=9.5, italic=True, color=NAVY)
+
+def bullets(doc, items):
+    for i, b in enumerate(items):
+        bullet(doc, b, keep_next=(i == 0))
+
+def add_consulting(doc):
+    section_header(doc, CONSULTING["title"], CONSULTING["date"])
+    for i, client in enumerate(CONSULTING["clients"]):
+        client_header(doc, client["name"], client["blurb"], before=1 if i == 0 else 5)
+        bullets(doc, client["bullets"])
+
+def add_founder(doc):
+    section_header(doc, FOUNDER["title"], FOUNDER["date"])
+    client_header(doc, FOUNDER["org"], None, before=1)
+    bullets(doc, FOUNDER["bullets"])
+
+def add_experience(doc, founder_first=False):
+    sections = [add_founder, add_consulting] if founder_first else [add_consulting, add_founder]
+    for add_section in sections:
+        add_section(doc)
+
 # ── document builder ─────────────────────────────────────────────────────────
 
 def new_document():
@@ -384,7 +414,8 @@ def add_page_footer(doc):
 
 
 def save(doc, filename):
-    path = os.path.join(OUT_DIR, filename)
+    os.makedirs(DOCX_DIR, exist_ok=True)
+    path = os.path.join(DOCX_DIR, filename)
     doc.save(path)
     print(f"✓  {filename}")
     return path
@@ -400,12 +431,7 @@ def build():
     for h in HIGHLIGHTS:
         bullet(doc, h)
 
-    # Experience
-    section_header(doc, "Experience")
-    for exp in EXPERIENCE:
-        entry_header(doc, exp["title"], exp["org"], exp["date"])
-        for i, b in enumerate(exp["bullets"]):
-            bullet(doc, b, keep_next=(i == 0))
+    add_experience(doc, founder_first=True)
 
     # Products
     section_header(doc, "Products")
@@ -417,8 +443,8 @@ def build():
     for cat, items in SKILLS:
         skill_row(doc, cat, items)
 
-    # Education & Certifications
-    section_header(doc, "Education & Certifications")
+    # Education
+    section_header(doc, "Education")
     for ed in EDUCATION:
         p = doc.add_paragraph()
         spacing(p, before=3, after=0)
@@ -426,15 +452,6 @@ def build():
         run(p, ed["degree"], size=10, bold=True)
         run(p, "   " + ed["school"], size=9.5, italic=True, color=NAVY)
         run(p, "\t" + ed["date"], size=9, color=MUTED)
-
-    p = doc.add_paragraph()
-    spacing(p, before=6, after=0)
-    p.paragraph_format.line_spacing = 1.12
-    run(p, "Anthropic Certifications (2026):  ", size=9.5, bold=True)
-    for i, (name, url) in enumerate(CERTIFICATIONS):
-        if i:
-            run(p, "  ·  ", size=9.5, color=MUTED)
-        link(p, url, name.replace(" ", "\u00a0"), size=9.5)
 
     # Research & Awards
     section_header(doc, "Research & Awards")
@@ -451,8 +468,9 @@ def to_pdf(docx_path):
     if not soffice:
         print("!  LibreOffice not found, skipping PDF export")
         return
+    os.makedirs(PDF_DIR, exist_ok=True)
     subprocess.run(
-        [soffice, "--headless", "--convert-to", "pdf", "--outdir", OUT_DIR, docx_path],
+        [soffice, "--headless", "--convert-to", "pdf", "--outdir", PDF_DIR, docx_path],
         check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
     )
     print(f"✓  {os.path.splitext(os.path.basename(docx_path))[0]}.pdf")

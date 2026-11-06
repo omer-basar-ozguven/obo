@@ -1,12 +1,12 @@
 """
 Generate the one-page CV tailored to Tether's AI Harness Engineer role.
 Reuses the design helpers from generate_master_cv.py.
-Run: python3 generate_tether_cv.py
+Run: python3 cvs/generate_tether_cv.py
 """
 
 from generate_master_cv import (
-    INK, MUTED, NAVY, RIGHT_TAB,
-    add_header, add_summary, bullet, new_document, product, run,
+    MUTED, NAVY, RIGHT_TAB,
+    add_experience, add_header, add_summary, new_document, product, run,
     save, section_header, skill_row, spacing, tab_stop, to_pdf,
 )
 
@@ -19,52 +19,6 @@ SUMMARY = (
     "timeouts, and flaky networks, and I have built microservices and AI tools over EVM and Solana data for web3 "
     "clients using libp2p, IPFS, and WebRTC."
 )
-
-CONSULTING = {
-    "title": "Consulting Engineer",
-    "date": "2022 – 2026",
-    "clients": [
-        {
-            "name": "Placemaking AI",
-            "blurb": "Real estate intelligence, 106M+ points of interest",
-            "bullets": [
-                "Built TypeScript agent harnesses with tool calling, agent loops, and structured outputs over the "
-                "POI data.",
-                "Designed AI tools and modules that expose the platform's data to users and to other services.",
-                "Built the microservices behind the AI layer, plus the big data pipelines and data science workflows "
-                "feeding it (Python, FastAPI, LangChain, AWS).",
-            ],
-        },
-        {
-            "name": "Web3 clients",
-            "blurb": "Numerous consulting projects",
-            "bullets": [
-                "Led the microservices and LLM based AI tools over EVM and Solana data, in TypeScript and Python.",
-                "Worked with P2P protocols: libp2p, IPFS, and WebRTC.",
-            ],
-        },
-        {
-            "name": "Mole",
-            "blurb": "AI utility detection used by government agencies",
-            "bullets": [
-                "Built FastAPI inference and Supabase infrastructure for a deep learning ensemble on GPR survey data.",
-            ],
-        },
-    ],
-}
-
-FOUNDER = {
-    "title": "Co-Founder & Lead Software Engineer",
-    "date": "2021 – 2026",
-    "org": "Bronix  ·  50+ completed projects",
-    "bullets": [
-        "Built VoltAgent agent harnesses with tool calling, multi step loops, context management, and structured "
-        "outputs.",
-        "Shipped LLM features across 10+ apps via OpenRouter, Claude, and OpenAI, with retries, timeouts, model "
-        "fallbacks, and graceful degradation when a provider fails.",
-        "Led engineering on 10+ products from architecture to launch on the App Store, Google Play, and the web.",
-    ],
-}
 
 PROJECTS = [
     {
@@ -102,33 +56,12 @@ SKILLS = [
     ("AI Dev Tools",    ["Cursor", "Claude Code"]),
 ]
 
-def client_header(doc, name, blurb, before=5):
-    p = doc.add_paragraph()
-    spacing(p, before=before, after=1)
-    p.paragraph_format.keep_with_next = True
-    run(p, name, size=10.5, bold=True, color=INK)
-    if blurb:
-        run(p, "   " + blurb, size=9.5, italic=True, color=NAVY)
-
-
-def bullets(doc, items):
-    for i, b in enumerate(items):
-        bullet(doc, b, keep_next=(i == 0))
-
 
 def build():
     doc = new_document()
     add_header(doc)
     add_summary(doc, SUMMARY)
-
-    section_header(doc, CONSULTING["title"], CONSULTING["date"])
-    for i, client in enumerate(CONSULTING["clients"]):
-        client_header(doc, client["name"], client["blurb"], before=1 if i == 0 else 5)
-        bullets(doc, client["bullets"])
-
-    section_header(doc, FOUNDER["title"], FOUNDER["date"])
-    client_header(doc, FOUNDER["org"], None, before=1)
-    bullets(doc, FOUNDER["bullets"])
+    add_experience(doc)
 
     section_header(doc, "Selected Projects")
     for proj in PROJECTS:

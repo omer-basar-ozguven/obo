@@ -1,6 +1,6 @@
 """
 Generate 6 tailored 1-page CVs for Ömer Başar Özgüven.
-Run: python3 generate_cvs.py
+Run: python3 cvs/generate_cvs.py
 """
 
 from docx import Document
@@ -11,14 +11,16 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 import os
 
+from generate_master_cv import DOCX_DIR, to_pdf
+
 NAME     = "Ömer Başar Özgüven"
 PHONE    = "+90 531 269 11 05"
 EMAIL    = "omerbasarozguven@gmail.com"
 WEBSITE  = "omerbasarozguven.com"
 LINKEDIN = "linkedin.com/in/omerbasarozguven"
 GITHUB   = "github.com/omer-basar-ozguven"
-OUT_DIR  = os.path.dirname(os.path.abspath(__file__))
-PHOTO    = os.path.join(OUT_DIR, "public", "icons", "obo.jpeg")
+REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PHOTO    = os.path.join(REPO_DIR, "public", "icons", "obo.jpeg")
 
 GREEN    = (0x2E, 0x7D, 0x32)
 
@@ -212,9 +214,11 @@ def build_cv(filename, role_title, summary, experience, projects, skills, certs=
         for b in research["bullets"]:
             bullet(doc, b)
 
-    path = os.path.join(OUT_DIR, filename)
+    os.makedirs(DOCX_DIR, exist_ok=True)
+    path = os.path.join(DOCX_DIR, filename)
     doc.save(path)
     print(f"✓  {filename}")
+    to_pdf(path)
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -233,7 +237,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix  ·  50+ completed projects",
+            "org": "Bronix Software Inc.  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Architected and shipped 10+ consumer products, iterating on product analytics and user funnels.",
@@ -267,7 +271,6 @@ build_cv(
         ("Data & Infra",["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents", ["OpenRouter", "Fal.ai", "VoltAgent", "LangChain", "Claude API", "OpenAI API"]),
     ],
-    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
     research=RESEARCH,
 )
 
@@ -287,7 +290,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix  ·  50+ completed projects",
+            "org": "Bronix Software Inc.  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Shipped 6+ production Flutter and Expo apps across iOS and Android, from architecture to App Store launch.",
@@ -331,7 +334,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix  ·  50+ completed projects",
+            "org": "Bronix Software Inc.  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Defined product vision and led full-stack engineering for 10+ consumer apps across mobile (Flutter/Expo) and web (Next.js).",
@@ -374,7 +377,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix  ·  50+ completed projects",
+            "org": "Bronix Software Inc.  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Designed and built REST APIs for consumer mobile apps in Node.js (Express/Hono) and Go (Fiber).",
@@ -406,7 +409,6 @@ build_cv(
         ("DevOps & Cloud", ["Docker", "AWS", "Railway", "Vercel", "Firebase Functions", "Supabase Edge Functions"]),
         ("AI & Data",    ["LangChain", "VoltAgent", "OpenRouter", "Fal.ai", "Apify", "ETL Pipelines"]),
     ],
-    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
     research=RESEARCH,
 )
 
@@ -426,7 +428,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix  ·  50+ completed projects",
+            "org": "Bronix Software Inc.  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Shipped 10+ consumer products end-to-end across iOS, Android, and web, from architecture to release.",
@@ -460,7 +462,6 @@ build_cv(
         ("Data & Infra",  ["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents",   ["VoltAgent", "LangChain", "OpenRouter", "Fal.ai", "Claude API", "OpenAI API"]),
     ],
-    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
     research=RESEARCH,
 )
 
@@ -480,7 +481,7 @@ build_cv(
     experience=[
         {
             "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix  ·  50+ completed projects",
+            "org": "Bronix Software Inc.  ·  50+ completed projects",
             "date": "2021 – 2026",
             "bullets": [
                 "Shipped AI-powered features across 10+ consumer products: generative image/video, chat, and agentic flows.",
@@ -505,6 +506,5 @@ build_cv(
         ("Languages",       ["Python", "TypeScript", "JavaScript", "Dart", "Go", "SQL"]),
         ("Backend & Infra", ["FastAPI", "Node.js", "PostgreSQL", "Supabase", "Firebase", "Docker", "AWS", "Railway"]),
     ],
-    certs=["Claude Code 101", "Claude Platform 101", "AI Fluency: Framework & Foundations"],
     research=RESEARCH,
 )
