@@ -16,7 +16,7 @@ export function About() {
             ))}
           </div>
 
-          <RevealGroup className="mt-10 grid grid-cols-3 gap-3 sm:gap-4" stagger={0.1}>
+          <RevealGroup className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4" stagger={0.1}>
             {highlights.map((h) => (
               <RevealItem key={h.label} direction="up" className="h-full">
                 <div className="h-full rounded-2xl border border-border bg-surface/50 p-3 sm:p-5">

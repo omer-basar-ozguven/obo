@@ -16,8 +16,7 @@ SUMMARY = (
     "Software engineer with five years of production experience, most recently on agent harnesses and AI "
     "tools. At Placemaking AI I built TypeScript agent harnesses with tool calling, agent loops, and structured "
     "outputs over 106M+ points of interest, plus the microservices behind them. I design for model errors, "
-    "timeouts, and flaky networks, and I have built microservices and AI tools over EVM and Solana data for web3 "
-    "clients using libp2p, IPFS, and WebRTC."
+    "timeouts, and flaky networks, and I have hands on experience with P2P protocols like libp2p, IPFS, and WebRTC."
 )
 
 PROJECTS = [
@@ -50,7 +49,7 @@ SKILLS = [
     ("AI & Agents",     ["Agent Harnesses", "Tool Calling", "Agent Loops", "Context Management",
                          "Structured Outputs", "VoltAgent", "LangChain", "OpenRouter", "Claude API", "OpenAI API"]),
     ("Languages",       ["TypeScript", "JavaScript", "Python", "Go", "Dart", "SQL"]),
-    ("P2P & Web3",      ["libp2p", "IPFS", "WebRTC", "EVM", "Solana"]),
+    ("P2P",             ["libp2p", "IPFS", "WebRTC"]),
     ("Backend & Infra", ["Node.js", "Express", "Hono", "FastAPI", "PostgreSQL", "Redis", "Docker", "AWS",
                          "Supabase", "Firebase"]),
     ("AI Dev Tools",    ["Cursor", "Claude Code"]),
@@ -63,7 +62,7 @@ def build():
     add_summary(doc, SUMMARY)
     add_experience(doc)
 
-    section_header(doc, "Selected Projects")
+    section_header(doc, "Selected Products")
     for proj in PROJECTS:
         product(doc, proj)
 

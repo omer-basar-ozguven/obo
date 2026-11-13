@@ -37,6 +37,19 @@ PROJECT_STATUS = {
     "SeriesStudio":   "Open Source",
 }
 
+FOUNDER_TITLE    = "Co-Founder & Lead Software Engineer"
+FOUNDER_DATE     = "2021 – 2026"
+FOUNDER_ORG      = "Bronix Software Inc.  ·  50+ completed projects"
+CONSULTING_TITLE = "Consulting Engineer"
+CONSULTING_DATE  = "2022 – 2026"
+
+CLIENT_BLURBS = {
+    "Placemaking AI": "Real estate intelligence, 106M+ points of interest",
+    "Mole":           "AI utility detection used by government agencies",
+}
+
+P2P_SKILLS = ("P2P", ["libp2p", "IPFS", "WebRTC"])
+
 RESEARCH = {
     "org":    "Bilkent University — Miniature Robotics Laboratory",
     "period": "2018 – 2021",
@@ -90,6 +103,23 @@ def section_header(doc, text):
     run(p, text.upper(), size=9, bold=True, color=(0x22, 0x22, 0x22))
     bottom_border(p, color="BBBBBB", sz="4")
 
+def role_header(doc, title, date_str):
+    p = doc.add_paragraph()
+    sp(p, before=4, after=1)
+    right_tab(p)
+    p.paragraph_format.keep_with_next = True
+    run(p, title.upper(), size=9, bold=True, color=(0x22, 0x22, 0x22))
+    run(p, "\t" + date_str, size=9, color=(0x77, 0x77, 0x77))
+    bottom_border(p, color="BBBBBB", sz="4")
+
+def client_header(doc, name, blurb=None, before=3):
+    p = doc.add_paragraph()
+    sp(p, before=before, after=1)
+    p.paragraph_format.keep_with_next = True
+    run(p, name, size=10, bold=True)
+    if blurb:
+        run(p, "   " + blurb, size=9.5, italic=True, color=(0x55, 0x55, 0x55))
+
 def job_header(doc, title, org, date_str):
     p = doc.add_paragraph()
     sp(p, before=3, after=1)
@@ -125,7 +155,7 @@ def skills_line(doc, category, items):
 
 # ── document builder ─────────────────────────────────────────────────────────
 
-def build_cv(filename, role_title, summary, experience, projects, skills, certs=None, research=None):
+def build_cv(filename, role_title, summary, founder, projects, skills, consulting=None, research=None):
     doc = Document()
 
     for sec in doc.sections:
@@ -171,15 +201,21 @@ def build_cv(filename, role_title, summary, experience, projects, skills, certs=
     sp(p, 1, 1)
     run(p, summary, size=9.5)
 
-    # Experience
-    section_header(doc, "Experience")
-    for exp in experience:
-        job_header(doc, exp["title"], exp["org"], exp["date"])
-        for b in exp["bullets"]:
-            bullet(doc, b)
+    # Experience, one section per role
+    role_header(doc, FOUNDER_TITLE, FOUNDER_DATE)
+    client_header(doc, FOUNDER_ORG, before=1)
+    for b in founder:
+        bullet(doc, b)
+
+    if consulting:
+        role_header(doc, CONSULTING_TITLE, CONSULTING_DATE)
+        for i, client in enumerate(consulting):
+            client_header(doc, client["name"], CLIENT_BLURBS[client["name"]], before=1 if i == 0 else 3)
+            for b in client["bullets"]:
+                bullet(doc, b)
 
     # Projects
-    section_header(doc, "Selected Projects")
+    section_header(doc, "Selected Products")
     for proj in projects:
         project_line(doc, proj["name"], proj["desc"], proj.get("tech"),
                      PROJECT_STATUS.get(proj["name"]))
@@ -200,12 +236,6 @@ def build_cv(filename, role_title, summary, experience, projects, skills, certs=
     sp(p, 1, 0)
     run(p, "High School Diploma (International Baccalaureate)", size=9.5, bold=True)
     run(p, "  ·  TED Ankara College, Ankara, Turkey  ·  2012 – 2016", size=9.5)
-
-    if certs:
-        p = doc.add_paragraph()
-        sp(p, 2, 0)
-        run(p, "Certifications:  ", size=9.5, bold=True)
-        run(p, "  |  ".join(certs), size=9.5)
 
     # Research
     if research:
@@ -234,27 +264,19 @@ build_cv(
         "taken enterprise scale platforms to production and built practical AI features into apps people use every "
         "day. I move quickly, own what I build, and would rather ship something real than polish something forever."
     ),
-    experience=[
-        {
-            "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix Software Inc.  ·  50+ completed projects",
-            "date": "2021 – 2026",
-            "bullets": [
-                "Architected and shipped 10+ consumer products, iterating on product analytics and user funnels.",
-                "Built web platforms and admin dashboards with Next.js, React, and Tailwind CSS.",
-                "Developed REST APIs and backend services in Node.js (Express/Hono) and Go (Fiber).",
-                "Managed cloud infrastructure (Firebase, Supabase, AWS) and integrated AI via OpenRouter and Fal.ai.",
-            ],
-        },
-        {
-            "title": "Consulting Engineer",
-            "org": "Mole  ·  Placemaking AI",
-            "date": "2022 – 2026",
-            "bullets": [
-                "Mole: Built the FastAPI backend and Supabase infra for an AI GPR utility-detection platform (MEDAS).",
-                "Placemaking AI: Built microservices processing 106M+ points of interest.",
-            ],
-        },
+    founder=[
+        "Architected and shipped 10+ consumer products, iterating on product analytics and user funnels.",
+        "Built web platforms and admin dashboards with Next.js, React, and Tailwind CSS.",
+        "Developed REST APIs and backend services in Node.js (Express/Hono) and Go (Fiber).",
+        "Managed cloud infrastructure (Firebase, Supabase, AWS) and integrated AI via OpenRouter and Fal.ai.",
+    ],
+    consulting=[
+        {"name": "Placemaking AI", "bullets": [
+            "Built microservices processing 106M+ points of interest, plus TypeScript agent harnesses over that data.",
+        ]},
+        {"name": "Mole", "bullets": [
+            "Built the FastAPI backend and Supabase infra for an AI GPR utility-detection platform (MEDAS).",
+        ]},
     ],
     projects=[
         {"name": "Placemaking AI", "desc": "Real estate intelligence platform built on 106M+ points of interest.", "tech": "Python, FastAPI, LangChain, AWS"},
@@ -270,6 +292,7 @@ build_cv(
         ("Backend",     ["Node.js", "Express", "Hono", "Go Fiber", "FastAPI", "Django"]),
         ("Data & Infra",["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents", ["OpenRouter", "Fal.ai", "VoltAgent", "LangChain", "Claude API", "OpenAI API"]),
+        P2P_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -287,19 +310,12 @@ build_cv(
         "dashboard, I build that too, so nothing stalls waiting on someone else. Enough launches have taught me that "
         "the last ten percent is where the real work hides."
     ),
-    experience=[
-        {
-            "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix Software Inc.  ·  50+ completed projects",
-            "date": "2021 – 2026",
-            "bullets": [
-                "Shipped 6+ production Flutter and Expo apps across iOS and Android, from architecture to App Store launch.",
-                "Integrated RevenueCat for subscription billing and in-app purchase management.",
-                "Built Firebase-backed real-time features: Auth, Firestore, Cloud Messaging, and Storage.",
-                "Embedded AI features including on-device Fal.ai image generation and agentic navigation via VoltAgent.",
-                "Managed App Store and Google Play releases; analyzed user funnels and churn to prioritize iterations.",
-            ],
-        },
+    founder=[
+        "Shipped 6+ production Flutter and Expo apps across iOS and Android, from architecture to App Store launch.",
+        "Integrated RevenueCat for subscription billing and in-app purchase management.",
+        "Built Firebase-backed real-time features: Auth, Firestore, Cloud Messaging, and Storage.",
+        "Embedded AI features including on-device Fal.ai image generation and agentic navigation via VoltAgent.",
+        "Managed App Store and Google Play releases; analyzed user funnels and churn to prioritize iterations.",
     ],
     projects=[
         {"name": "Walkable",       "desc": "Walking navigation that color-codes streets by how safe they are, with no account and location kept entirely on device.",        "tech": "Flutter, VoltAgent, Firebase, Supabase"},
@@ -314,6 +330,7 @@ build_cv(
         ("Backend",      ["Node.js", "Express", "FastAPI", "Firebase Functions", "Supabase"]),
         ("Languages",    ["Dart", "TypeScript", "JavaScript", "Python"]),
         ("AI & Agents",  ["Fal.ai", "VoltAgent", "OpenRouter", "Claude API"]),
+        P2P_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -331,18 +348,11 @@ build_cv(
         "stack with a real sense of what to build next and why it matters. I watch how people actually use a "
         "product, and I let that decide what gets built and what gets cut."
     ),
-    experience=[
-        {
-            "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix Software Inc.  ·  50+ completed projects",
-            "date": "2021 – 2026",
-            "bullets": [
-                "Defined product vision and led full-stack engineering for 10+ consumer apps across mobile (Flutter/Expo) and web (Next.js).",
-                "Shipped subscription products with RevenueCat billing; managed App Store and Google Play lifecycle.",
-                "Built AI-powered tools integrating OpenRouter, Fal.ai, and VoltAgent for generative and agentic workflows.",
-                "Owned roadmap and engineering from zero to launch, iterating on product analytics, funnels, and churn.",
-            ],
-        },
+    founder=[
+        "Defined product vision and led full-stack engineering for 10+ consumer apps across mobile (Flutter/Expo) and web (Next.js).",
+        "Shipped subscription products with RevenueCat billing; managed App Store and Google Play lifecycle.",
+        "Built AI-powered tools integrating OpenRouter, Fal.ai, and VoltAgent for generative and agentic workflows.",
+        "Owned roadmap and engineering from zero to launch, iterating on product analytics, funnels, and churn.",
     ],
     projects=[
         {"name": "YükAl",        "desc": "Freight marketplace connecting cargo owners with truck drivers nationwide, with free listing and a carrier subscription model.", "tech": "Expo, Next.js, Supabase"},
@@ -356,6 +366,7 @@ build_cv(
         ("Engineering", ["Flutter", "Expo", "Next.js", "React", "Node.js", "Go", "Python", "FastAPI"]),
         ("AI & Agents", ["VoltAgent", "OpenRouter", "Fal.ai", "LangChain", "Claude API", "OpenAI API"]),
         ("Infra",       ["Firebase", "Supabase", "PostgreSQL", "Docker", "AWS", "Railway", "Vercel"]),
+        P2P_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -374,26 +385,18 @@ build_cv(
         "design for scale and reliability, but I keep things simple enough that the next person can actually maintain "
         "them. Performance problems are the kind I genuinely enjoy chasing down."
     ),
-    experience=[
-        {
-            "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix Software Inc.  ·  50+ completed projects",
-            "date": "2021 – 2026",
-            "bullets": [
-                "Designed and built REST APIs for consumer mobile apps in Node.js (Express/Hono) and Go (Fiber).",
-                "Managed PostgreSQL databases, Redis caching, and Docker deployments on Railway and AWS.",
-                "Built serverless functions and event pipelines powering product analytics and behavioral data.",
-            ],
-        },
-        {
-            "title": "Consulting Engineer — Backend & Data",
-            "org": "Mole  ·  Placemaking AI",
-            "date": "2022 – 2026",
-            "bullets": [
-                "Placemaking AI: Architected microservices processing 106M+ POIs, with ETL and data science pipelines.",
-                "Mole: Built a FastAPI inference pipeline for a deep-learning GPR utility-detection model (MEDAS).",
-            ],
-        },
+    founder=[
+        "Designed and built REST APIs for consumer mobile apps in Node.js (Express/Hono) and Go (Fiber).",
+        "Managed PostgreSQL databases, Redis caching, and Docker deployments on Railway and AWS.",
+        "Built serverless functions and event pipelines powering product analytics and behavioral data.",
+    ],
+    consulting=[
+        {"name": "Placemaking AI", "bullets": [
+            "Architected microservices processing 106M+ POIs, with ETL and data science pipelines.",
+        ]},
+        {"name": "Mole", "bullets": [
+            "Built a FastAPI inference pipeline for a deep-learning GPR utility-detection model (MEDAS).",
+        ]},
     ],
     projects=[
         {"name": "Placemaking AI", "desc": "Microservices backend and ETL pipelines processing 106M+ points of interest for a real estate intelligence platform.", "tech": "Python, FastAPI, PostGIS, AWS"},
@@ -408,6 +411,7 @@ build_cv(
         ("Databases",    ["PostgreSQL", "PostGIS", "Redis", "MongoDB", "Supabase", "Firebase"]),
         ("DevOps & Cloud", ["Docker", "AWS", "Railway", "Vercel", "Firebase Functions", "Supabase Edge Functions"]),
         ("AI & Data",    ["LangChain", "VoltAgent", "OpenRouter", "Fal.ai", "Apify", "ETL Pipelines"]),
+        P2P_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -425,27 +429,19 @@ build_cv(
         "the way to production, AI integrations included. Five years of building products with small teams has taught "
         "me to be pragmatic about what actually needs building."
     ),
-    experience=[
-        {
-            "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix Software Inc.  ·  50+ completed projects",
-            "date": "2021 – 2026",
-            "bullets": [
-                "Shipped 10+ consumer products end-to-end across iOS, Android, and web, from architecture to release.",
-                "Built mobile apps in Flutter and Expo, and web platforms and dashboards in Next.js and React.",
-                "Developed backend APIs and services in Node.js, Go, and Python on PostgreSQL, Firebase, and Supabase.",
-                "Integrated AI capabilities (OpenRouter, Fal.ai, VoltAgent) and iterated using product analytics and user funnels.",
-            ],
-        },
-        {
-            "title": "Consulting Engineer",
-            "org": "Mole  ·  Placemaking AI",
-            "date": "2022 – 2026",
-            "bullets": [
-                "Placemaking AI: Built microservices and data pipelines processing 106M+ points of interest.",
-                "Mole: Built a FastAPI inference backend for a deep-learning GPR utility-detection platform (MEDAS).",
-            ],
-        },
+    founder=[
+        "Shipped 10+ consumer products end-to-end across iOS, Android, and web, from architecture to release.",
+        "Built mobile apps in Flutter and Expo, and web platforms and dashboards in Next.js and React.",
+        "Developed backend APIs and services in Node.js, Go, and Python on PostgreSQL, Firebase, and Supabase.",
+        "Integrated AI capabilities (OpenRouter, Fal.ai, VoltAgent) and iterated using product analytics and user funnels.",
+    ],
+    consulting=[
+        {"name": "Placemaking AI", "bullets": [
+            "Built microservices, data pipelines, and TypeScript agent harnesses over 106M+ points of interest.",
+        ]},
+        {"name": "Mole", "bullets": [
+            "Built a FastAPI inference backend for a deep-learning GPR utility-detection platform (MEDAS).",
+        ]},
     ],
     projects=[
         {"name": "YükAl",        "desc": "Turkish freight marketplace matching cargo owners with truck drivers across all 81 provinces.", "tech": "Expo, Express.js, Next.js, Supabase"},
@@ -461,6 +457,7 @@ build_cv(
         ("Web & Mobile",  ["React", "Next.js", "Flutter", "Expo", "React Native"]),
         ("Data & Infra",  ["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents",   ["VoltAgent", "LangChain", "OpenRouter", "Fal.ai", "Claude API", "OpenAI API"]),
+        P2P_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -478,26 +475,28 @@ build_cv(
         "Claude, which keeps my output well above what the headcount suggests. I stay close to the models as they "
         "change, because half the advantage is knowing what just became possible."
     ),
-    experience=[
-        {
-            "title": "Co-Founder & Lead Software Engineer",
-            "org": "Bronix Software Inc.  ·  50+ completed projects",
-            "date": "2021 – 2026",
-            "bullets": [
-                "Shipped AI-powered features across 10+ consumer products: generative image/video, chat, and agentic flows.",
-                "Integrated LLM and generative APIs (Claude, OpenAI, OpenRouter, Fal.ai) into mobile and web apps.",
-                "Built agentic systems with VoltAgent orchestrating multi-step, tool-using pipelines.",
-                "Built the mobile apps and SeriesStudio pipeline using AI-assisted development with Cursor and Claude.",
-            ],
-        },
+    founder=[
+        "Built VoltAgent agent harnesses with tool calling, multi step loops, context management, and structured outputs.",
+        "Shipped LLM features across 10+ apps via OpenRouter, Claude, and OpenAI, with retries and model fallbacks.",
+        "Built the mobile apps and SeriesStudio pipeline using AI-assisted development with Cursor and Claude.",
+    ],
+    consulting=[
+        {"name": "Placemaking AI", "bullets": [
+            "Built TypeScript agent harnesses with tool calling, agent loops, and structured outputs over the POI data.",
+            "Designed AI tools and modules that expose the platform's data to users and to other services.",
+            "Built the microservices behind the AI layer, plus the data pipelines feeding it (Python, FastAPI, LangChain, AWS).",
+        ]},
+        {"name": "Mole", "bullets": [
+            "Built FastAPI inference and Supabase infrastructure for a deep learning ensemble on GPR survey data.",
+        ]},
     ],
     projects=[
         {"name": "SeriesStudio",   "desc": "Open-source agentic pipeline turning a short series idea into full episodic video output. Built with Cursor.", "tech": "VoltAgent, Docker"},
-        {"name": "Banana Labs",    "desc": "AI creative studio generating videos, product shoots, and images across several models in parallel. Built with Cursor.", "tech": "Fal.ai, OpenRouter, Next.js, Supabase"},
-        {"name": "NextRoom",       "desc": "AI interior design that redesigns any space from one photo in 12+ styles or a custom prompt. Built with Claude Code.", "tech": "Fal.ai, Flutter, Firebase"},
-        {"name": "Walkable",       "desc": "Navigation app using an agentic pipeline to color-code streets by walkability and safety. Built with Cursor & Claude Code.", "tech": "VoltAgent, Flutter, Firebase"},
+        {"name": "Banana Labs",    "desc": "AI studio comparing several models in parallel for videos and images. Built with Cursor.", "tech": "Fal.ai, OpenRouter, Next.js"},
+        {"name": "NextRoom",       "desc": "AI interior design that redesigns any room from one photo in 12+ styles. Built with Claude Code.", "tech": "Fal.ai, Flutter, Firebase"},
+        {"name": "Walkable",       "desc": "Agentic pipeline that color codes streets by walkability and safety. Built with Cursor & Claude Code.", "tech": "VoltAgent, Flutter, Firebase"},
         {"name": "Next2Me",        "desc": "Couples app with AI-powered conversation questions via OpenRouter, daily streaks, swipe-to-match on movies and activities, and private encrypted chat. Built with Cursor.", "tech": "Flutter, Firebase, Railway, OpenRouter"},
-        {"name": "Toxic Flamingo", "desc": "A to-do app that uses AI to nag and roast you into finishing tasks, with Rage Mode, app blocking, and a Pomodoro timer. Built with Cursor.", "tech": "Flutter, Firebase"},
+        {"name": "Toxic Flamingo", "desc": "AI task app that roasts you into finishing tasks, with Rage Mode and app blocking. Built with Cursor.", "tech": "Flutter, Firebase"},
     ],
     skills=[
         ("AI & Agents",     ["VoltAgent", "LangChain", "Claude API", "OpenAI API", "OpenRouter", "Fal.ai", "Apify"]),
@@ -505,6 +504,7 @@ build_cv(
         ("AI-Assisted Dev", ["Cursor", "Claude Code"]),
         ("Languages",       ["Python", "TypeScript", "JavaScript", "Dart", "Go", "SQL"]),
         ("Backend & Infra", ["FastAPI", "Node.js", "PostgreSQL", "Supabase", "Firebase", "Docker", "AWS", "Railway"]),
+        P2P_SKILLS,
     ],
     research=RESEARCH,
 )

@@ -54,6 +54,10 @@ const TECH_ICON_MAP: Record<string, string> = {
   "Express.js": "express",
   FastAPI: "fastapi",
 
+  // P2P
+  IPFS: "ipfs",
+  WebRTC: "webrtc",
+
   // Data & Infrastructure
   Firebase: "firebase",
   "Firebase SDK": "firebase",

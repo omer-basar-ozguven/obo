@@ -99,7 +99,7 @@ export const portfolio: Portfolio = {
   role: "Software & Product Engineer",
   tagline: "I build things that ship.",
   summary:
-    "Co-founder of Bronix and a full-stack engineer. I build mobile apps, AI tools, and web platforms, and I take them all the way from idea to launch.",
+    "Co-founder of Bronix and a full-stack engineer. I work with clients, most of them non-technical, to turn their ideas into mobile apps, AI tools, and web platforms, and I take them from idea to launch.",
   location: "Turkey",
   email: "omerbasarozguven@gmail.com",
   resumeUrl: undefined,
@@ -115,13 +115,14 @@ export const portfolio: Portfolio = {
   ],
   about: {
     paragraphs: [
-      "I'm a software engineer, and I co-founded Bronix, a software studio that has completed more than 50 engineering projects. I led engineering on more than a dozen of our own consumer apps there. I built all sorts of things there: couples tools, AI interior design, safe-walking navigation, a freight marketplace, and plenty more. Every one of them taught me something that I carried into the next.",
+      "I'm a software engineer, and I co-founded Bronix, a software studio that has completed more than 50 engineering projects. A big part of my job was working with our 30+ clients, from exchange office owners, truck drivers, and financial influencers to a defense organization, and turning what they needed into technical plans we could build. I led engineering on more than a dozen of our own consumer apps there. I built all sorts of things there: couples tools, AI interior design, safe-walking navigation, a freight marketplace, and plenty more. Every one of them taught me something that I carried into the next.",
       "My stack is broad on purpose. Flutter and Expo for mobile, Next.js for web apps and admin dashboards, Go and Python for APIs and data pipelines, Firebase and Supabase on the backend, and more and more AI tooling like VoltAgent, OpenRouter, and Fal.ai. I've also worked on big data systems. Clean architecture matters to me, but shipping something people will actually benefit from, matters more.",
       "I also work in a data-informed way, digging into product analytics and user funnels to find where people drop off or churn, then iterating on the product to fix it.",
     ],
     highlights: [
       { label: "Projects completed", value: "50+" },
       { label: "Products shipped", value: "10+" },
+      { label: "Clients", value: "30+" },
       { label: "Available", value: "Now" },
     ],
     company: {
@@ -247,6 +248,10 @@ export const portfolio: Portfolio = {
     {
       category: "Backend & APIs",
       items: ["Node.js", "Hono", "Express", "Fiber", "FastAPI", "Firebase Functions"],
+    },
+    {
+      category: "P2P",
+      items: ["libp2p", "IPFS", "WebRTC"],
     },
     {
       category: "Languages",

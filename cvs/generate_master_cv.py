@@ -44,9 +44,9 @@ SKILL_INDENT = Inches(1.2)
 
 SUMMARY = (
     "Software engineer with five years of building and shipping real products, from mobile apps to AI agent "
-    "systems. As a consulting engineer I built TypeScript agent harnesses and microservices for Placemaking AI and "
-    "web3 clients, and as one of the founders of Bronix I led engineering on more than ten of our own products. I "
-    "care about owning outcomes and do my best work where engineering and product meet."
+    "systems. As a consulting engineer I built TypeScript agent harnesses and microservices for Placemaking AI, "
+    "and as one of the founders of Bronix I led engineering on more than ten of our own products. I care about owning "
+    "outcomes and do my best work where engineering and product meet."
 )
 
 HIGHLIGHTS = [
@@ -72,14 +72,6 @@ CONSULTING = {
                 "Designed AI tools and modules that expose the platform's data to users and to other services.",
                 "Built the microservices behind the AI layer, plus the big data pipelines and data science workflows "
                 "feeding it (Python, FastAPI, LangChain, AWS).",
-            ],
-        },
-        {
-            "name": "Web3 clients",
-            "blurb": "Numerous consulting projects",
-            "bullets": [
-                "Led the microservices and LLM based AI tools over EVM and Solana data, in TypeScript and Python.",
-                "Worked with P2P protocols: libp2p, IPFS, and WebRTC.",
             ],
         },
         {
@@ -174,7 +166,7 @@ SKILLS = [
                         "Supabase Edge Functions"]),
     ("Data & Infra",   ["PostgreSQL", "PostGIS", "Redis", "MongoDB", "Firebase", "Supabase", "Docker", "AWS",
                         "Google Cloud", "Railway", "Vercel"]),
-    ("P2P & Web3",     ["libp2p", "IPFS", "WebRTC", "EVM", "Solana"]),
+    ("P2P",            ["libp2p", "IPFS", "WebRTC"]),
     ("AI & Agents",    ["VoltAgent", "LangChain", "Claude API", "OpenAI API", "OpenRouter", "Fal.ai", "Apify",
                         "RAG", "Tool Use", "Structured Output", "Prompt Engineering"]),
     ("AI Dev Tools",   ["Cursor", "Claude Code"]),
