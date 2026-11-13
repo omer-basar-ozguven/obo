@@ -85,7 +85,7 @@ CONSULTING = {
 }
 
 FOUNDER = {
-    "title": "Co-Founder & Lead Software Engineer",
+    "title": "Co-Founder  |  Lead Software Engineer  |  Client-Facing",
     "date": "July 2021 – July 2026",
     "org": "Bronix Software Inc.  ·  50+ completed projects",
     "bullets": [

@@ -37,7 +37,7 @@ PROJECT_STATUS = {
     "SeriesStudio":   "Open Source",
 }
 
-FOUNDER_TITLE    = "Co-Founder & Lead Software Engineer"
+FOUNDER_TITLE    = "Co-Founder  |  Lead Software Engineer  |  Client-Facing"
 FOUNDER_DATE     = "July 2021 – July 2026"
 FOUNDER_ORG      = "Bronix Software Inc.  ·  50+ completed projects"
 CONSULTING_TITLE = "Consulting Engineer"
