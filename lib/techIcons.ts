@@ -16,6 +16,7 @@ const DEVICON_BASE =
 /** Icons sourced from Devicon (not available in Simple Icons). */
 const DEVICON_MAP: Record<string, string> = {
   AWS: `${DEVICON_BASE}/amazonwebservices/amazonwebservices-plain-wordmark.svg`,
+  Slack: `${DEVICON_BASE}/slack/slack-original.svg`,
 };
 
 /** Custom icons: local assets or external URLs not covered by Simple Icons. */
@@ -82,6 +83,12 @@ const TECH_ICON_MAP: Record<string, string> = {
   RevenueCat: "revenuecat",
 
   Cursor: "cursor",
+
+  // Collaboration
+  Figma: "figma",
+  Notion: "notion",
+  Bitbucket: "bitbucket",
+  Jira: "jira",
 };
 
 export function getTechIconUrl(name: string): string | null {

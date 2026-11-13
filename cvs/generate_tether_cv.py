@@ -53,6 +53,7 @@ SKILLS = [
     ("Backend & Infra", ["Node.js", "Express", "Hono", "FastAPI", "PostgreSQL", "Redis", "Docker", "AWS",
                          "Supabase", "Firebase"]),
     ("AI Dev Tools",    ["Cursor", "Claude Code"]),
+    ("Collaboration",   ["Figma", "Notion", "Slack", "Bitbucket", "Jira"]),
 ]
 
 

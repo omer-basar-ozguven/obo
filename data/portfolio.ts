@@ -261,6 +261,10 @@ export const portfolio: Portfolio = {
       category: "Web & Frontend",
       items: ["React", "Next.js", "Tailwind CSS", "shadcn/ui"],
     },
+    {
+      category: "Collaboration",
+      items: ["Figma", "Notion", "Slack", "Bitbucket", "Jira"],
+    },
   ],
   education: [
     {

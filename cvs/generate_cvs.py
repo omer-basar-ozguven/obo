@@ -49,6 +49,7 @@ CLIENT_BLURBS = {
 }
 
 P2P_SKILLS = ("P2P", ["libp2p", "IPFS", "WebRTC"])
+COLLAB_SKILLS = ("Collaboration", ["Figma", "Notion", "Slack", "Bitbucket", "Jira"])
 
 RESEARCH = {
     "org":    "Bilkent University — Miniature Robotics Laboratory",
@@ -293,6 +294,7 @@ build_cv(
         ("Data & Infra",["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents", ["OpenRouter", "Fal.ai", "VoltAgent", "LangChain", "Claude API", "OpenAI API"]),
         P2P_SKILLS,
+        COLLAB_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -331,6 +333,7 @@ build_cv(
         ("Languages",    ["Dart", "TypeScript", "JavaScript", "Python"]),
         ("AI & Agents",  ["Fal.ai", "VoltAgent", "OpenRouter", "Claude API"]),
         P2P_SKILLS,
+        COLLAB_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -367,6 +370,7 @@ build_cv(
         ("AI & Agents", ["VoltAgent", "OpenRouter", "Fal.ai", "LangChain", "Claude API", "OpenAI API"]),
         ("Infra",       ["Firebase", "Supabase", "PostgreSQL", "Docker", "AWS", "Railway", "Vercel"]),
         P2P_SKILLS,
+        COLLAB_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -412,6 +416,7 @@ build_cv(
         ("DevOps & Cloud", ["Docker", "AWS", "Railway", "Vercel", "Firebase Functions", "Supabase Edge Functions"]),
         ("AI & Data",    ["LangChain", "VoltAgent", "OpenRouter", "Fal.ai", "Apify", "ETL Pipelines"]),
         P2P_SKILLS,
+        COLLAB_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -458,6 +463,7 @@ build_cv(
         ("Data & Infra",  ["PostgreSQL", "Firebase", "Supabase", "Redis", "Docker", "AWS", "Railway", "Vercel"]),
         ("AI & Agents",   ["VoltAgent", "LangChain", "OpenRouter", "Fal.ai", "Claude API", "OpenAI API"]),
         P2P_SKILLS,
+        COLLAB_SKILLS,
     ],
     research=RESEARCH,
 )
@@ -505,6 +511,7 @@ build_cv(
         ("Languages",       ["Python", "TypeScript", "JavaScript", "Dart", "Go", "SQL"]),
         ("Backend & Infra", ["FastAPI", "Node.js", "PostgreSQL", "Supabase", "Firebase", "Docker", "AWS", "Railway"]),
         P2P_SKILLS,
+        COLLAB_SKILLS,
     ],
     research=RESEARCH,
 )

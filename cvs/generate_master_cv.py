@@ -170,6 +170,7 @@ SKILLS = [
     ("AI & Agents",    ["VoltAgent", "LangChain", "Claude API", "OpenAI API", "OpenRouter", "Fal.ai", "Apify",
                         "RAG", "Tool Use", "Structured Output", "Prompt Engineering"]),
     ("AI Dev Tools",   ["Cursor", "Claude Code"]),
+    ("Collaboration",  ["Figma", "Notion", "Slack", "Bitbucket", "Jira"]),
     ("Product",        ["Product Definition", "Roadmapping", "Product Analytics", "Funnel & Churn Analysis",
                         "App Store Optimization", "Subscription Monetization"]),
 ]
