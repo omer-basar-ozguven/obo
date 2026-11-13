@@ -86,7 +86,7 @@ CONSULTING = {
 
 FOUNDER = {
     "title": "Co-Founder & Lead Software Engineer",
-    "date": "2021 – 2026",
+    "date": "July 2021 – July 2026",
     "org": "Bronix Software Inc.  ·  50+ completed projects",
     "bullets": [
         "Built VoltAgent agent harnesses with tool calling, multi step loops, context management, and structured "

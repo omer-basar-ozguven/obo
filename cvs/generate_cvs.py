@@ -38,7 +38,7 @@ PROJECT_STATUS = {
 }
 
 FOUNDER_TITLE    = "Co-Founder & Lead Software Engineer"
-FOUNDER_DATE     = "2021 – 2026"
+FOUNDER_DATE     = "July 2021 – July 2026"
 FOUNDER_ORG      = "Bronix Software Inc.  ·  50+ completed projects"
 CONSULTING_TITLE = "Consulting Engineer"
 CONSULTING_DATE  = "2022 – 2026"

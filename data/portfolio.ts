@@ -127,7 +127,7 @@ export const portfolio: Portfolio = {
     ],
     company: {
       name: "Bronix Software Inc.",
-      role: "Previously · Co-Founder",
+      role: "Co-Founder · July 2021 – July 2026",
       blurb:
         "The software studio I co-founded and ran engineering for. We completed 50+ software engineering projects, including our own subscription mobile apps and AI tools built on Flutter, Expo, and Next.js, and I owned the whole thing from architecture decisions down to the App Store release.",
       url: "https://bronixengineering.com",
